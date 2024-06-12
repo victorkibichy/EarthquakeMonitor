@@ -58,6 +58,8 @@ class EarthquakeViewController: UIViewController {
 
 extension EarthquakeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       
+        
         return viewModel.earthquakes.count
     }
     
@@ -65,6 +67,8 @@ extension EarthquakeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let earthquake = viewModel.earthquakes[indexPath.row]
         cell.textLabel?.text = "\(earthquake.magnitude) - \(earthquake.place)"
+        
+        
         return cell
     }
 }
