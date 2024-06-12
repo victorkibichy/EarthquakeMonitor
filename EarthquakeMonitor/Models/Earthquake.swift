@@ -9,6 +9,9 @@ import Foundation
 
 import Foundation
 
+// DECLARING THE DATA TO CONFORM TO THE CODABLE PROTOCOL
+
+
 struct Earthquake: Codable {
     let magnitude: Double
     let place: String

@@ -13,6 +13,10 @@ class EarthquakeViewModel {
     @Published var earthquakes: [Earthquake] = []
     private var cancellables: Set<AnyCancellable> = []
     
+    
+    
+//    FERTCHING THE EARTHQUAKE DATA FOR THE LOCATIONS
+   
     func fetchEarthquakes() {
         let urlString = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2022-01-01&endtime=2022-01-02"
         guard let url = URL(string: urlString) else { return }

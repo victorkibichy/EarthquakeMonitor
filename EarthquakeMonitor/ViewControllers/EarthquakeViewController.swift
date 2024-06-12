@@ -23,7 +23,8 @@ class EarthquakeViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = .systemTeal
+        view.backgroundColor = UIColor(red: 0, green: 0.69, blue: 0.64, alpha: 1.0)
+
         title = "Earthquakes Data"
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -39,6 +40,9 @@ class EarthquakeViewController: UIViewController {
         ])
     }
     
+    
+    
+    
     private func bindViewModel() {
         viewModel.$earthquakes
             .receive(on: DispatchQueue.main)
@@ -48,6 +52,9 @@ class EarthquakeViewController: UIViewController {
             .store(in: &cancellables)
     }
 }
+
+
+
 
 extension EarthquakeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		057AAFCE2C199B2800CFDEEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFCD2C199B2800CFDEEE /* AppDelegate.swift */; };
 		057AAFD02C199B2800CFDEEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFCF2C199B2800CFDEEE /* SceneDelegate.swift */; };
-		057AAFD22C199B2800CFDEEE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD12C199B2800CFDEEE /* ViewController.swift */; };
+		057AAFD22C199B2800CFDEEE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD12C199B2800CFDEEE /* MapViewController.swift */; };
 		057AAFD82C199B2800CFDEEE /* EarthquakeMonitor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD62C199B2800CFDEEE /* EarthquakeMonitor.xcdatamodeld */; };
 		057AAFDA2C199B2B00CFDEEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 057AAFD92C199B2B00CFDEEE /* Assets.xcassets */; };
 		057AAFDD2C199B2B00CFDEEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057AAFDB2C199B2B00CFDEEE /* LaunchScreen.storyboard */; };
@@ -30,8 +30,8 @@
 		057AB01A2C19AA4000CFDEEE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AB0172C19AA4000CFDEEE /* CoreDataStack.swift */; };
 		057AB01B2C19ACE100CFDEEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFCD2C199B2800CFDEEE /* AppDelegate.swift */; };
 		057AB01C2C19ACE200CFDEEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFCD2C199B2800CFDEEE /* AppDelegate.swift */; };
-		057AB01D2C19BA3700CFDEEE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD12C199B2800CFDEEE /* ViewController.swift */; };
-		057AB01E2C19BA3700CFDEEE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD12C199B2800CFDEEE /* ViewController.swift */; };
+		057AB01D2C19BA3700CFDEEE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD12C199B2800CFDEEE /* MapViewController.swift */; };
+		057AB01E2C19BA3700CFDEEE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD12C199B2800CFDEEE /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,7 +55,7 @@
 		057AAFCA2C199B2800CFDEEE /* EarthquakeMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthquakeMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		057AAFCD2C199B2800CFDEEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		057AAFCF2C199B2800CFDEEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		057AAFD12C199B2800CFDEEE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		057AAFD12C199B2800CFDEEE /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		057AAFD72C199B2800CFDEEE /* EarthquakeMonitor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EarthquakeMonitor.xcdatamodel; sourceTree = "<group>"; };
 		057AAFD92C199B2B00CFDEEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		057AAFDC2C199B2B00CFDEEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -122,7 +122,6 @@
 				057AB0092C19A2A600CFDEEE /* ViewControllers */,
 				057AB0072C19A20800CFDEEE /* Support */,
 				057AB0022C19A15500CFDEEE /* ViewModels */,
-				057AB0012C19A14E00CFDEEE /* Views */,
 				057AB0002C19A14500CFDEEE /* Models */,
 				057AAFD92C199B2B00CFDEEE /* Assets.xcassets */,
 				057AAFDB2C199B2B00CFDEEE /* LaunchScreen.storyboard */,
@@ -158,13 +157,6 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		057AB0012C19A14E00CFDEEE /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		057AB0022C19A15500CFDEEE /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -185,8 +177,8 @@
 		057AB0092C19A2A600CFDEEE /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				057AAFD12C199B2800CFDEEE /* ViewController.swift */,
 				057AB00E2C19A35A00CFDEEE /* EarthquakeViewController.swift */,
+				057AAFD12C199B2800CFDEEE /* MapViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -323,7 +315,7 @@
 			files = (
 				057AB0042C19A1E400CFDEEE /* Earthquake.swift in Sources */,
 				057AB00B2C19A31100CFDEEE /* EarthquakeViewModel.swift in Sources */,
-				057AAFD22C199B2800CFDEEE /* ViewController.swift in Sources */,
+				057AAFD22C199B2800CFDEEE /* MapViewController.swift in Sources */,
 				057AAFD82C199B2800CFDEEE /* EarthquakeMonitor.xcdatamodeld in Sources */,
 				057AAFCE2C199B2800CFDEEE /* AppDelegate.swift in Sources */,
 				057AB00F2C19A35A00CFDEEE /* EarthquakeViewController.swift in Sources */,
@@ -340,7 +332,7 @@
 				057AB0192C19AA4000CFDEEE /* CoreDataStack.swift in Sources */,
 				057AB0052C19A1E400CFDEEE /* Earthquake.swift in Sources */,
 				057AB00C2C19A31100CFDEEE /* EarthquakeViewModel.swift in Sources */,
-				057AB01D2C19BA3700CFDEEE /* ViewController.swift in Sources */,
+				057AB01D2C19BA3700CFDEEE /* MapViewController.swift in Sources */,
 				057AAFE82C199B2C00CFDEEE /* EarthquakeMonitorTests.swift in Sources */,
 				057AB0102C19A35A00CFDEEE /* EarthquakeViewController.swift in Sources */,
 			);
@@ -356,7 +348,7 @@
 				057AB01A2C19AA4000CFDEEE /* CoreDataStack.swift in Sources */,
 				057AB01C2C19ACE200CFDEEE /* AppDelegate.swift in Sources */,
 				057AAFF22C199B2C00CFDEEE /* EarthquakeMonitorUITests.swift in Sources */,
-				057AB01E2C19BA3700CFDEEE /* ViewController.swift in Sources */,
+				057AB01E2C19BA3700CFDEEE /* MapViewController.swift in Sources */,
 				057AB00D2C19A31100CFDEEE /* EarthquakeViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
