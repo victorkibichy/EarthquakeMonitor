@@ -16,7 +16,7 @@ struct Earthquake: Codable {
     let magnitude: Double
     let place: String
     let time: Date
-    let coordinates: [Double] // [longitude, latitude, depth]
+    let coordinates: [Double] // this is the coordinates tthat pend modifications [longitude, latitude, depth]
 }
 
 struct EarthquakeResponse: Codable {
