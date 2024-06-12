@@ -58,7 +58,7 @@ class EarthquakeViewController: UIViewController {
 
 extension EarthquakeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       
+        
         
         return viewModel.earthquakes.count
     }
@@ -66,9 +66,22 @@ extension EarthquakeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let earthquake = viewModel.earthquakes[indexPath.row]
-        cell.textLabel?.text = "\(earthquake.magnitude) - \(earthquake.place)"
         
+        // Create an attributed string for the cell text
+        let attributedText = NSMutableAttributedString(string: "\(earthquake.magnitude) - \(earthquake.place)")
+        
+        // Set RED color for magnitude component. this UI is subject ti change in the deployment
+        let magnitudeRange = NSRange(location: 0, length: "\(earthquake.magnitude)".count)
+        attributedText.addAttribute(.foregroundColor, value: UIColor.red, range: magnitudeRange)
+        
+        // Set BLACK color for the rest of the text AS FROM LOCATION
+        let restOfStringRange = NSRange(location: "\(earthquake.magnitude)".count + 3, length: "\(earthquake.place)".count)
+        attributedText.addAttribute(.foregroundColor, value: UIColor.blue, range: restOfStringRange)
+        
+        // Assign the attributed text to the cell's text label
+        cell.textLabel?.attributedText = attributedText
         
         return cell
     }
+    
 }

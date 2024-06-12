@@ -36,34 +36,34 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             
         }
         
-        
-        
-        func createSearchNC() -> UINavigationController {
-            let earthquakeVC = EarthquakeViewController()
-            earthquakeVC.title = "Search"
-            earthquakeVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
-            return UINavigationController(rootViewController: earthquakeVC)
-            
-        }
-        
-        func createFavoritesNC() -> UINavigationController {
-            let mapVC = MapViewController()
-            mapVC.title = "Favorites"
-            mapVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
-            return UINavigationController(rootViewController: mapVC)
-        }
+    func createEarthquakeNC() -> UINavigationController {
+        let earthquakeVC = EarthquakeViewController()
+        earthquakeVC.title = "Earthquakes"
+        // Set the tab bar item with a world icon
+        earthquakeVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "globe"), tag: 0)
+        return UINavigationController(rootViewController: earthquakeVC)
+    }
+
+    func createMapNC() -> UINavigationController {
+        let mapVC = MapViewController()
+        mapVC.title = "View Map"
+        // Set the tab bar item with a map icon
+        mapVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "map"), tag: 1)
+        return UINavigationController(rootViewController: mapVC)
+    }
+
         
         func createTabbar() -> UITabBarController {
             let tabbar = UITabBarController()
             UITabBar.appearance().tintColor = .systemGreen
-            tabbar.viewControllers = [createSearchNC(), createFavoritesNC()]
+            tabbar.viewControllers = [createEarthquakeNC(), createMapNC()]
             
             return tabbar
             
         }
         
         func configureNavigationBar() {
-            UINavigationBar.appearance().tintColor = .systemGreen
+            UINavigationBar.appearance().tintColor = .systemTeal
             
         }
         
