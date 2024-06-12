@@ -10,7 +10,6 @@
 		057AAFCE2C199B2800CFDEEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFCD2C199B2800CFDEEE /* AppDelegate.swift */; };
 		057AAFD02C199B2800CFDEEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFCF2C199B2800CFDEEE /* SceneDelegate.swift */; };
 		057AAFD22C199B2800CFDEEE /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD12C199B2800CFDEEE /* ViewController.swift */; };
-		057AAFD52C199B2800CFDEEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057AAFD32C199B2800CFDEEE /* Main.storyboard */; };
 		057AAFD82C199B2800CFDEEE /* EarthquakeMonitor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD62C199B2800CFDEEE /* EarthquakeMonitor.xcdatamodeld */; };
 		057AAFDA2C199B2B00CFDEEE /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 057AAFD92C199B2B00CFDEEE /* Assets.xcassets */; };
 		057AAFDD2C199B2B00CFDEEE /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 057AAFDB2C199B2B00CFDEEE /* LaunchScreen.storyboard */; };
@@ -41,7 +40,6 @@
 		057AAFCD2C199B2800CFDEEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		057AAFCF2C199B2800CFDEEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		057AAFD12C199B2800CFDEEE /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		057AAFD42C199B2800CFDEEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		057AAFD72C199B2800CFDEEE /* EarthquakeMonitor.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = EarthquakeMonitor.xcdatamodel; sourceTree = "<group>"; };
 		057AAFD92C199B2B00CFDEEE /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		057AAFDC2C199B2B00CFDEEE /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -104,7 +102,6 @@
 				057AAFCD2C199B2800CFDEEE /* AppDelegate.swift */,
 				057AAFCF2C199B2800CFDEEE /* SceneDelegate.swift */,
 				057AAFD12C199B2800CFDEEE /* ViewController.swift */,
-				057AAFD32C199B2800CFDEEE /* Main.storyboard */,
 				057AAFD92C199B2B00CFDEEE /* Assets.xcassets */,
 				057AAFDB2C199B2B00CFDEEE /* LaunchScreen.storyboard */,
 				057AAFDE2C199B2B00CFDEEE /* Info.plist */,
@@ -236,7 +233,6 @@
 			files = (
 				057AAFDD2C199B2B00CFDEEE /* LaunchScreen.storyboard in Resources */,
 				057AAFDA2C199B2B00CFDEEE /* Assets.xcassets in Resources */,
-				057AAFD52C199B2800CFDEEE /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -301,14 +297,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		057AAFD32C199B2800CFDEEE /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				057AAFD42C199B2800CFDEEE /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		057AAFDB2C199B2B00CFDEEE /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -444,11 +432,13 @@
 				DEVELOPMENT_TEAM = TN8F86PNVM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EarthquakeMonitor/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -472,11 +462,13 @@
 				DEVELOPMENT_TEAM = TN8F86PNVM;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = EarthquakeMonitor/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.news";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
+				INFOPLIST_KEY_UIStatusBarStyle = "";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
