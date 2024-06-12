@@ -11,15 +11,61 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-        guard let windowScene = (scene as? UIWindowScene) else { return }
+  
         
-        let window = UIWindow(windowScene: windowScene)
-        let viewController = EarthquakeViewController() // Initial view controller forr my app
-        window.rootViewController = UINavigationController(rootViewController: viewController)
-        self.window = window
-        window.makeKeyAndVisible()
         
+        func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+            
+            
+            guard let windowScene = (scene as? UIWindowScene) else { return }
+            
+            let earthquakeNC = UINavigationController(rootViewController: EarthquakeViewController())
+            let mapNC = UINavigationController(rootViewController: MapViewController())
+            
+            
+            window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+            window?.windowScene = windowScene
+            window?.rootViewController = createTabbar()
+            window?.makeKeyAndVisible()
+            
+            
+            
+            
+           
+            configureNavigationBar()
+            
+        }
+        
+        
+        
+        func createSearchNC() -> UINavigationController {
+            let earthquakeVC = EarthquakeViewController()
+            earthquakeVC.title = "Search"
+            earthquakeVC.tabBarItem = UITabBarItem(tabBarSystemItem: .search, tag: 0)
+            return UINavigationController(rootViewController: earthquakeVC)
+            
+        }
+        
+        func createFavoritesNC() -> UINavigationController {
+            let mapVC = MapViewController()
+            mapVC.title = "Favorites"
+            mapVC.tabBarItem = UITabBarItem(tabBarSystemItem: .favorites, tag: 1)
+            return UINavigationController(rootViewController: mapVC)
+        }
+        
+        func createTabbar() -> UITabBarController {
+            let tabbar = UITabBarController()
+            UITabBar.appearance().tintColor = .systemGreen
+            tabbar.viewControllers = [createSearchNC(), createFavoritesNC()]
+            
+            return tabbar
+            
+        }
+        
+        func configureNavigationBar() {
+            UINavigationBar.appearance().tintColor = .systemGreen
+            
+        }
         
        
         
@@ -57,4 +103,4 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
     }
     
-}
+
