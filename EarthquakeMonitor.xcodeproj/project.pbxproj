@@ -16,6 +16,9 @@
 		057AAFE82C199B2C00CFDEEE /* EarthquakeMonitorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFE72C199B2C00CFDEEE /* EarthquakeMonitorTests.swift */; };
 		057AAFF22C199B2C00CFDEEE /* EarthquakeMonitorUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFF12C199B2C00CFDEEE /* EarthquakeMonitorUITests.swift */; };
 		057AAFF42C199B2C00CFDEEE /* EarthquakeMonitorUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFF32C199B2C00CFDEEE /* EarthquakeMonitorUITestsLaunchTests.swift */; };
+		057AB0042C19A1E400CFDEEE /* Earthquake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AB0032C19A1E400CFDEEE /* Earthquake.swift */; };
+		057AB0052C19A1E400CFDEEE /* Earthquake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AB0032C19A1E400CFDEEE /* Earthquake.swift */; };
+		057AB0062C19A1E400CFDEEE /* Earthquake.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AB0032C19A1E400CFDEEE /* Earthquake.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +52,7 @@
 		057AAFED2C199B2C00CFDEEE /* EarthquakeMonitorUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EarthquakeMonitorUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		057AAFF12C199B2C00CFDEEE /* EarthquakeMonitorUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthquakeMonitorUITests.swift; sourceTree = "<group>"; };
 		057AAFF32C199B2C00CFDEEE /* EarthquakeMonitorUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthquakeMonitorUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		057AB0032C19A1E400CFDEEE /* Earthquake.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Earthquake.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,9 +103,10 @@
 		057AAFCC2C199B2800CFDEEE /* EarthquakeMonitor */ = {
 			isa = PBXGroup;
 			children = (
-				057AAFCD2C199B2800CFDEEE /* AppDelegate.swift */,
-				057AAFCF2C199B2800CFDEEE /* SceneDelegate.swift */,
-				057AAFD12C199B2800CFDEEE /* ViewController.swift */,
+				057AB0072C19A20800CFDEEE /* Utilities */,
+				057AB0022C19A15500CFDEEE /* ViewModels */,
+				057AB0012C19A14E00CFDEEE /* Views */,
+				057AB0002C19A14500CFDEEE /* Models */,
 				057AAFD92C199B2B00CFDEEE /* Assets.xcassets */,
 				057AAFDB2C199B2B00CFDEEE /* LaunchScreen.storyboard */,
 				057AAFDE2C199B2B00CFDEEE /* Info.plist */,
@@ -125,6 +130,38 @@
 				057AAFF32C199B2C00CFDEEE /* EarthquakeMonitorUITestsLaunchTests.swift */,
 			);
 			path = EarthquakeMonitorUITests;
+			sourceTree = "<group>";
+		};
+		057AB0002C19A14500CFDEEE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				057AB0032C19A1E400CFDEEE /* Earthquake.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		057AB0012C19A14E00CFDEEE /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				057AAFD12C199B2800CFDEEE /* ViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		057AB0022C19A15500CFDEEE /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		057AB0072C19A20800CFDEEE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				057AAFCF2C199B2800CFDEEE /* SceneDelegate.swift */,
+				057AAFCD2C199B2800CFDEEE /* AppDelegate.swift */,
+			);
+			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +294,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				057AB0042C19A1E400CFDEEE /* Earthquake.swift in Sources */,
 				057AAFD22C199B2800CFDEEE /* ViewController.swift in Sources */,
 				057AAFD82C199B2800CFDEEE /* EarthquakeMonitor.xcdatamodeld in Sources */,
 				057AAFCE2C199B2800CFDEEE /* AppDelegate.swift in Sources */,
@@ -268,6 +306,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				057AB0052C19A1E400CFDEEE /* Earthquake.swift in Sources */,
 				057AAFE82C199B2C00CFDEEE /* EarthquakeMonitorTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -277,6 +316,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				057AAFF42C199B2C00CFDEEE /* EarthquakeMonitorUITestsLaunchTests.swift in Sources */,
+				057AB0062C19A1E400CFDEEE /* Earthquake.swift in Sources */,
 				057AAFF22C199B2C00CFDEEE /* EarthquakeMonitorUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
