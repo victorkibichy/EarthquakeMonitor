@@ -4,7 +4,10 @@
 //
 //  Created by  Bouncy Baby on 6/12/24.
 //
+
+
 import UIKit
+
 import MapKit
 
 class MapViewController: UIViewController {
@@ -13,7 +16,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Earthquake Map"
+        title = "Earthquakes History Map"
         
         setupMapView()
     }
@@ -30,9 +33,9 @@ class MapViewController: UIViewController {
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        // Load an empty map
+        
         mapView.showsUserLocation = true
-        mapView.showsTraffic = false
+        mapView.showsTraffic = true
         mapView.showsScale = true
         mapView.showsCompass = true
     }
@@ -40,6 +43,6 @@ class MapViewController: UIViewController {
     override func loadView() {
         super.loadView()
         
-        // Do any additional view setup here if needed
+        
     }
 }

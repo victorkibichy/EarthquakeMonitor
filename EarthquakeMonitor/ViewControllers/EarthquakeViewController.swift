@@ -23,8 +23,7 @@ class EarthquakeViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = UIColor(red: 0, green: 0.69, blue: 0.64, alpha: 1.0)
-
+        view.backgroundColor = UIColor.systemTeal
         title = "Earthquakes Data"
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
@@ -40,9 +39,6 @@ class EarthquakeViewController: UIViewController {
         ])
     }
     
-    
-    
-    
     private func bindViewModel() {
         viewModel.$earthquakes
             .receive(on: DispatchQueue.main)
@@ -50,16 +46,25 @@ class EarthquakeViewController: UIViewController {
                 self?.tableView.reloadData()
             }
             .store(in: &cancellables)
+        
+        viewModel.$errorMessage
+            .compactMap { $0 } // Ignore nil values
+            .sink { [weak self] errorMessage in
+                self?.presentAlert(message: errorMessage)
+            }
+            .store(in: &cancellables)
+    }
+    
+    private func presentAlert(message: String) {
+        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
     }
 }
 
-
-
-
+// Extension for table view data source
 extension EarthquakeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        
         return viewModel.earthquakes.count
     }
     
@@ -67,21 +72,20 @@ extension EarthquakeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let earthquake = viewModel.earthquakes[indexPath.row]
         
-        // Create an attributed string for the cell text
-        let attributedText = NSMutableAttributedString(string: "\(earthquake.magnitude) - \(earthquake.place)")
+        // Customize cell text with colored components
+        let magnitudeText = "\(earthquake.magnitude)"
+        let placeText = " - \(earthquake.place)"
         
-        // Set RED color for magnitude component. this UI is subject ti change in the deployment
-        let magnitudeRange = NSRange(location: 0, length: "\(earthquake.magnitude)".count)
-        attributedText.addAttribute(.foregroundColor, value: UIColor.red, range: magnitudeRange)
+        let attributedText = NSMutableAttributedString(string: magnitudeText + placeText)
         
-        // Set BLACK color for the rest of the text AS FROM LOCATION
-        let restOfStringRange = NSRange(location: "\(earthquake.magnitude)".count + 3, length: "\(earthquake.place)".count)
-        attributedText.addAttribute(.foregroundColor, value: UIColor.blue, range: restOfStringRange)
+        // Set TO RED color for magnitude component
+        attributedText.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: 0, length: magnitudeText.count))
         
-        // Assign the attributed text to the cell's text label
+        // Set blue color for the rest of the text
+        attributedText.addAttribute(.foregroundColor, value: UIColor.blue, range: NSRange(location: magnitudeText.count, length: placeText.count))
+        
         cell.textLabel?.attributedText = attributedText
         
         return cell
     }
-    
 }
