@@ -64,17 +64,17 @@ class EarthquakeViewModel {
             switch urlError.code {
                 
             case .notConnectedToInternet:
-                errorMessage = "No internet connection. Please check your network settings."
+                errorMessage = ErrorType.notConnectedToInternet.rawValue
                 
             case .timedOut:
-                errorMessage = "The request timed out. Please try again."
+                errorMessage = ErrorType.timedOut.rawValue
                 
             case .cannotFindHost:
-                errorMessage = "Cannot find host. Please check the server address."
+                errorMessage = ErrorType.cannotFindHost.rawValue
                 
                 
             case .badServerResponse:
-                errorMessage = "Server error. Please try again later."
+                errorMessage = ErrorType.badServerResponse.rawValue
                 
             default:
                 errorMessage = "An unexpected error occurred: \(urlError.localizedDescription)"
