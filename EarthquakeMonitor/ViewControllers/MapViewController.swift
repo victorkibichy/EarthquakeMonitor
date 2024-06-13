@@ -16,7 +16,7 @@ class MapViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        title = "Earthquakes History Map"
+        title = "Earthquakes History"
         
         setupMapView()
     }

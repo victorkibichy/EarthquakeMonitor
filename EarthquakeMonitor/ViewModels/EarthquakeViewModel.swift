@@ -54,23 +54,39 @@ class EarthquakeViewModel {
     }
     
     private func handleError(_ error: Error) {
-        // Categorize error types
+        // CATEGORIES OF ERRORS
+        
+        
+        
+        
         if let urlError = error as? URLError {
+            
             switch urlError.code {
+                
             case .notConnectedToInternet:
                 errorMessage = "No internet connection. Please check your network settings."
+                
             case .timedOut:
                 errorMessage = "The request timed out. Please try again."
+                
             case .cannotFindHost:
                 errorMessage = "Cannot find host. Please check the server address."
+                
+                
             case .badServerResponse:
                 errorMessage = "Server error. Please try again later."
+                
             default:
                 errorMessage = "An unexpected error occurred: \(urlError.localizedDescription)"
             }
-        } else if let decodingError = error as? DecodingError {
+            
+        }
+        
+        else if let decodingError = error as? DecodingError {
             errorMessage = "Failed to parse earthquake data. Please try again."
-        } else {
+        }
+        
+        else {
             errorMessage = "An unknown error occurred: \(error.localizedDescription)"
         }
         print(errorMessage ?? "Unknown error")
