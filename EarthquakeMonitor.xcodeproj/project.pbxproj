@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		054D03BB2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D03BA2C1AD0D9000D7DEE /* ErrorMessages.swift */; };
+		054D03BC2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D03BA2C1AD0D9000D7DEE /* ErrorMessages.swift */; };
+		054D03BD2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D03BA2C1AD0D9000D7DEE /* ErrorMessages.swift */; };
 		057AAFCE2C199B2800CFDEEE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFCD2C199B2800CFDEEE /* AppDelegate.swift */; };
 		057AAFD02C199B2800CFDEEE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFCF2C199B2800CFDEEE /* SceneDelegate.swift */; };
 		057AAFD22C199B2800CFDEEE /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD12C199B2800CFDEEE /* MapViewController.swift */; };
@@ -52,6 +55,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		054D03BA2C1AD0D9000D7DEE /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
 		057AAFCA2C199B2800CFDEEE /* EarthquakeMonitor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EarthquakeMonitor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		057AAFCD2C199B2800CFDEEE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		057AAFCF2C199B2800CFDEEE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +100,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		054D03B92C1AD09F000D7DEE /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				054D03BA2C1AD0D9000D7DEE /* ErrorMessages.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		057AAFC12C199B2800CFDEEE = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +135,7 @@
 				057AB0072C19A20800CFDEEE /* Support */,
 				057AB0022C19A15500CFDEEE /* ViewModels */,
 				057AB0002C19A14500CFDEEE /* Models */,
+				054D03B92C1AD09F000D7DEE /* Utilities */,
 				057AAFD92C199B2B00CFDEEE /* Assets.xcassets */,
 				057AAFDB2C199B2B00CFDEEE /* LaunchScreen.storyboard */,
 				057AAFDE2C199B2B00CFDEEE /* Info.plist */,
@@ -318,6 +331,7 @@
 				057AAFD22C199B2800CFDEEE /* MapViewController.swift in Sources */,
 				057AAFD82C199B2800CFDEEE /* EarthquakeMonitor.xcdatamodeld in Sources */,
 				057AAFCE2C199B2800CFDEEE /* AppDelegate.swift in Sources */,
+				054D03BB2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */,
 				057AB00F2C19A35A00CFDEEE /* EarthquakeViewController.swift in Sources */,
 				057AAFD02C199B2800CFDEEE /* SceneDelegate.swift in Sources */,
 				057AB0182C19AA4000CFDEEE /* CoreDataStack.swift in Sources */,
@@ -328,6 +342,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				054D03BC2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */,
 				057AB01B2C19ACE100CFDEEE /* AppDelegate.swift in Sources */,
 				057AB0192C19AA4000CFDEEE /* CoreDataStack.swift in Sources */,
 				057AB0052C19A1E400CFDEEE /* Earthquake.swift in Sources */,
@@ -347,6 +362,7 @@
 				057AB0062C19A1E400CFDEEE /* Earthquake.swift in Sources */,
 				057AB01A2C19AA4000CFDEEE /* CoreDataStack.swift in Sources */,
 				057AB01C2C19ACE200CFDEEE /* AppDelegate.swift in Sources */,
+				054D03BD2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */,
 				057AAFF22C199B2C00CFDEEE /* EarthquakeMonitorUITests.swift in Sources */,
 				057AB01E2C19BA3700CFDEEE /* MapViewController.swift in Sources */,
 				057AB00D2C19A31100CFDEEE /* EarthquakeViewModel.swift in Sources */,
