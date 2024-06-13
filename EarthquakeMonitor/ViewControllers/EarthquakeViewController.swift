@@ -48,7 +48,7 @@ class EarthquakeViewController: UIViewController {
             .store(in: &cancellables)
         
         viewModel.$errorMessage
-            .compactMap { $0 } // Ignore nil values
+            .compactMap { $0 }
             .sink { [weak self] errorMessage in
                 self?.presentAlert(message: errorMessage)
             }
@@ -62,7 +62,7 @@ class EarthquakeViewController: UIViewController {
     }
 }
 
-// Extension for table view data source
+// thhis is the  Extension for table view data source
 extension EarthquakeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.earthquakes.count
@@ -74,7 +74,7 @@ extension EarthquakeViewController: UITableViewDataSource {
         
         // Customize cell text with colored components
         let magnitudeText = "\(earthquake.magnitude)"
-        let placeText = " - \(earthquake.place)"
+        let placeText = " ➡️ \(earthquake.place)"
         
         let attributedText = NSMutableAttributedString(string: magnitudeText + placeText)
         
