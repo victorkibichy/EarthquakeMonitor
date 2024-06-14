@@ -5,10 +5,11 @@
 //  Created by  Bouncy Baby on 6/12/24.
 //
 
+
 import UIKit
 import MapKit
 
-class MapViewController: UIViewController {
+class MapViewController: UIViewController, MKMapViewDelegate {
     var mapView: MKMapView!
     private var earthquakes: [Earthquake] = []
     private var mapTypeSegmentedControl: UISegmentedControl!
@@ -20,8 +21,8 @@ class MapViewController: UIViewController {
         title = "Earthquakes History"
         
         setupMapView()
-        setupMapControls() // Setup map controls for map type and compass
-        fetchEarthquakeData() // Fetch and display earthquake data on map
+        setupMapControls()
+        fetchEarthquakeData()
     }
     
     private func setupMapView() {
@@ -40,6 +41,12 @@ class MapViewController: UIViewController {
         mapView.showsTraffic = true
         mapView.showsScale = true
         mapView.showsCompass = true
+        
+        // Register the custom annotation view
+        mapView.register(EarthquakeAnnotationView.self, forAnnotationViewWithReuseIdentifier: EarthquakeAnnotationView.identifier)
+        
+        // Set delegate to self
+        mapView.delegate = self
     }
     
     private func setupMapControls() {
@@ -54,7 +61,6 @@ class MapViewController: UIViewController {
         compassButton.compassVisibility = .visible // Always show compass
         mapView.addSubview(compassButton)
     }
-//     THE TOP TOGGLE BUTTONS TO SWITCH TO DIFFERENT MAP TYPES
     
     @objc private func mapTypeChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -68,7 +74,6 @@ class MapViewController: UIViewController {
             break
         }
     }
-    
     
     private func fetchEarthquakeData() {
         guard let url = URL(string: "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2022-01-01&endtime=2022-01-02") else {
@@ -108,8 +113,7 @@ class MapViewController: UIViewController {
     
     private func addAnnotations() {
         mapView.removeAnnotations(mapView.annotations)
-//        Now `coordinate` is of type CLLocationCoordinate2D and can be used with MKAnnotation, MKMapView this is where the coordinate data type is changed to CLLocationCoordinate2D
-//        to enable annotation
+        
         for earthquake in earthquakes {
             let annotation = MKPointAnnotation()
             
@@ -123,7 +127,22 @@ class MapViewController: UIViewController {
             mapView.addAnnotation(annotation)
         }
         
-//        Map now retrns the annotations with the magnitude
         mapView.showAnnotations(mapView.annotations, animated: true)
+    }
+    
+    // MKMapViewDelegate method to return the custom annotation view
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+        guard let annotation = annotation as? MKPointAnnotation else { return nil }
+        
+        let identifier = EarthquakeAnnotationView.identifier
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? EarthquakeAnnotationView
+        
+        if annotationView == nil {
+            annotationView = EarthquakeAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        return annotationView
     }
 }
