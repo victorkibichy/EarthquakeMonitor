@@ -123,7 +123,7 @@ class MapViewController: UIViewController {
             mapView.addAnnotation(annotation)
         }
         
-        // Optionally, you can zoom the map to fit all annotations
+//        Map now retrns the annotations with the magnitude
         mapView.showAnnotations(mapView.annotations, animated: true)
     }
 }
