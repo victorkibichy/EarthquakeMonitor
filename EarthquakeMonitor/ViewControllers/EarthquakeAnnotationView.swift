@@ -39,9 +39,9 @@ class EarthquakeAnnotationView: MKMarkerAnnotationView {
             return .blue // Light earthquakes
         case 2.0..<4.0:
             return .green // Minor earthquakes
-        case 4.0..<6.0:
+        case 4.0..<4.5:
             return .orange // Moderate earthquakes
-        case 6.0..<7.0:
+        case 4.5..<7.0:
             return .red // Strong earthquakes
         case 7.0...:
             return .purple // Major earthquakes
