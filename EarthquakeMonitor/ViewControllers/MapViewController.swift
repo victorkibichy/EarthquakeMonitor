@@ -8,12 +8,11 @@
 import UIKit
 import MapKit
 
-import UIKit
-import MapKit
-
 class MapViewController: UIViewController {
     var mapView: MKMapView!
     private var earthquakes: [Earthquake] = []
+    private var mapTypeSegmentedControl: UISegmentedControl!
+    private var compassButton: MKCompassButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +20,8 @@ class MapViewController: UIViewController {
         title = "Earthquakes History"
         
         setupMapView()
-        fetchEarthquakeData() // this is toFetch and display earthquake data on map
+        setupMapControls() // Setup map controls for map type and compass
+        fetchEarthquakeData() // Fetch and display earthquake data on map
     }
     
     private func setupMapView() {
@@ -40,6 +40,32 @@ class MapViewController: UIViewController {
         mapView.showsTraffic = true
         mapView.showsScale = true
         mapView.showsCompass = true
+    }
+    
+    private func setupMapControls() {
+        // Map type segmented control
+        mapTypeSegmentedControl = UISegmentedControl(items: ["Standard", "Satellite", "Hybrid"])
+        mapTypeSegmentedControl.selectedSegmentIndex = 0 // Default to standard map type
+        mapTypeSegmentedControl.addTarget(self, action: #selector(mapTypeChanged(_:)), for: .valueChanged)
+        navigationItem.titleView = mapTypeSegmentedControl
+        
+        // Compass button
+        compassButton = MKCompassButton(mapView: mapView)
+        compassButton.compassVisibility = .visible // Always show compass
+        mapView.addSubview(compassButton)
+    }
+    
+    @objc private func mapTypeChanged(_ sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 0:
+            mapView.mapType = .standard
+        case 1:
+            mapView.mapType = .satellite
+        case 2:
+            mapView.mapType = .hybrid
+        default:
+            break
+        }
     }
     
     private func fetchEarthquakeData() {
