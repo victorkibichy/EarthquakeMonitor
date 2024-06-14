@@ -55,6 +55,10 @@ cd EarthquakeMonitor
 Select the target device and click the run button in Xcode.
 Usage
 
+**Launchscreen**
+![Simulator Screenshot - iPhone 14 Pro Max - 2024-06-14 at 11 24 32](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/e85f6f44-0b86-4ba5-bd7b-69f1a37e312e)
+
+
 **Earthquake List:**
 ![Simulator Screenshot - iPhone 14 Pro Max - 2024-06-14 at 11 24 10](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/25cc1475-6dcc-404d-b7e6-71a9473c24f4)
 
