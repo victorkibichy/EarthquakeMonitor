@@ -10,7 +10,7 @@ import Combine
 
 class EarthquakeViewModel {
     @Published var earthquakes: [Earthquake] = []
-    @Published var errorMessage: String? // To communicate errors to the UI
+    @Published var errorMessage: String? // To communicate errors to the UI(THE USER)
     private var cancellables: Set<AnyCancellable> = []
     
     func fetchEarthquakes() {
@@ -44,7 +44,9 @@ class EarthquakeViewModel {
                 case .finished:
                     break
                 case .failure(let error):
-                    // Handle specific error types and set appropriate error messages
+                    
+                    
+        // Handle specific error types and set appropriate error messages
                     self?.handleError(error)
                 }
             }, receiveValue: { [weak self] earthquakes in

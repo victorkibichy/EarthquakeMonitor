@@ -15,6 +15,8 @@ struct Earthquake: Codable {
     let time: Date
     let coordinates: [Double] // Keep coordinates as [Double]
 
+    
+
     init(magnitude: Double, place: String, time: Date, coordinates: [Double]) {
         self.magnitude = magnitude
         self.place = place

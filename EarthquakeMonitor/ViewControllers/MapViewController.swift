@@ -54,6 +54,7 @@ class MapViewController: UIViewController {
         compassButton.compassVisibility = .visible // Always show compass
         mapView.addSubview(compassButton)
     }
+//     THE TOP TOGGLE BUTTONS TO SWITCH TO DIFFERENT MAP TYPES
     
     @objc private func mapTypeChanged(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
@@ -67,6 +68,7 @@ class MapViewController: UIViewController {
             break
         }
     }
+    
     
     private func fetchEarthquakeData() {
         guard let url = URL(string: "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2022-01-01&endtime=2022-01-02") else {
@@ -106,7 +108,8 @@ class MapViewController: UIViewController {
     
     private func addAnnotations() {
         mapView.removeAnnotations(mapView.annotations)
-        
+//        Now `coordinate` is of type CLLocationCoordinate2D and can be used with MKAnnotation, MKMapView this is where the coordinate data type is changed to CLLocationCoordinate2D
+//        to enable annotation
         for earthquake in earthquakes {
             let annotation = MKPointAnnotation()
             
