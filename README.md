@@ -56,10 +56,16 @@ Select the target device and click the run button in Xcode.
 Usage
 
 **Earthquake List:**
+![Simulator Screenshot - iPhone 14 Pro Max - 2024-06-14 at 11 24 10](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/25cc1475-6dcc-404d-b7e6-71a9473c24f4)
+
+
 
 The main screen displays a list of recent earthquakes.
 Each cell shows the magnitude (in red) and location (in blue) of the earthquake.
-Map View:
+**Map View:
+**
+![Simulator Screenshot - iPhone 14 Pro Max - 2024-06-14 at 11 24 15](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/dc48a760-faac-489b-85b8-7854e338c3f4)
+
 
 Switch to the map view using the tab bar.
 The map shows pins at the locations of recent earthquakes.
