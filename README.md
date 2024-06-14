@@ -70,6 +70,11 @@ Each cell shows the magnitude (in red) and location (in blue) of the earthquake.
 **
 ![Simulator Screenshot - iPhone 14 Pro Max - 2024-06-14 at 11 24 15](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/dc48a760-faac-489b-85b8-7854e338c3f4)
 
+**UPDATED MAP WITH annotations **
+
+![Simulator Screenshot - iPhone 14 Pro - 2024-06-14 at 12 23 59](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/046bc57c-767b-44c4-99e0-fc97a0cc5000)
+
+
 
 Switch to the map view using the tab bar.
 The map shows pins at the locations of recent earthquakes.
