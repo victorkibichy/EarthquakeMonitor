@@ -12,6 +12,7 @@ class CoreDataStack {
     static let shared = CoreDataStack()
 
     // this will be used tp allow offline access of the data
+    
     lazy var persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "EarthquakeMonitor")
         container.loadPersistentStores { (description, error) in
