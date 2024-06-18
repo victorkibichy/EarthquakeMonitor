@@ -45,11 +45,11 @@ class LegendViewController: UIViewController {
     
     // Setup the legend view
     private func setupView() {
-        view.backgroundColor = UIColor.white.withAlphaComponent(0.95)
-        view.layer.cornerRadius = 16
-        view.layer.masksToBounds = true
+        updateBackgroundColor()
         
         // Shadow and border
+        view.layer.cornerRadius = 16
+        view.layer.masksToBounds = true
         view.layer.shadowColor = UIColor.black.cgColor
         view.layer.shadowOpacity = 0.2
         view.layer.shadowOffset = CGSize(width: 0, height: 4)
@@ -134,6 +134,25 @@ class LegendViewController: UIViewController {
         ])
         
         return legendItemView
+    }
+    
+    // Update background color based on interface style
+    private func updateBackgroundColor() {
+        if traitCollection.userInterfaceStyle == .dark {
+            view.backgroundColor = UIColor.black.withAlphaComponent(0.95)
+            titleLabel.textColor = .white
+            dismissButton.tintColor = .white
+        } else {
+            view.backgroundColor = UIColor.white.withAlphaComponent(0.95)
+            titleLabel.textColor = .black
+            dismissButton.tintColor = .black
+        }
+    }
+    
+    // Update background color on trait collection change
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        updateBackgroundColor()
     }
     
     // Dismiss the legend view
