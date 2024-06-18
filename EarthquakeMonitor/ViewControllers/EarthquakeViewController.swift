@@ -23,7 +23,7 @@ class EarthquakeViewController: UIViewController {
     }
     
     private func setupUI() {
-        view.backgroundColor = UIColor.systemTeal
+        view.backgroundColor = UIColor.systemBackground
         title = "Earthquakes Data"
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
