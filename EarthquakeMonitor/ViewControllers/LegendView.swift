@@ -6,7 +6,6 @@
 //
 
 import Foundation
-// LegendView.swift
 import UIKit
 
 class LegendView: UIView {

@@ -5,7 +5,6 @@
 //  Created by  Bouncy Baby on 6/12/24.
 //
 
-
 import UIKit
 import MapKit
 
@@ -60,6 +59,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         compassButton = MKCompassButton(mapView: mapView)
         compassButton.compassVisibility = .visible // Always show compass
         mapView.addSubview(compassButton)
+        
+        // Legend button
+        let legendButton = UIButton(type: .infoLight)
+        legendButton.addTarget(self, action: #selector(showLegend), for: .touchUpInside)
+        let legendBarItem = UIBarButtonItem(customView: legendButton)
+        navigationItem.rightBarButtonItem = legendBarItem
     }
     
     @objc private func mapTypeChanged(_ sender: UISegmentedControl) {
@@ -73,6 +78,12 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         default:
             break
         }
+    }
+    
+    @objc private func showLegend() {
+        let alertController = UIAlertController(title: "Legend", message: "Annotations:\nRed pin - Magnitude >= 4.5\nOrange pin - Magnitude >= 4\nYellow pin - Magnitude < 4", preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+        present(alertController, animated: true, completion: nil)
     }
     
     private func fetchEarthquakeData() {
