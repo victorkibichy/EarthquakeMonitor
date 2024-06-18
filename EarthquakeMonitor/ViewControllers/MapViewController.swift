@@ -81,9 +81,13 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     @objc private func showLegend() {
-        let alertController = UIAlertController(title: "Legend", message: "Annotations:\nRed pin - Magnitude >= 4.5\nOrange pin - Magnitude >= 4\nYellow pin - Magnitude < 4", preferredStyle: .alert)
-        alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-        present(alertController, animated: true, completion: nil)
+        let legendVC = LegendViewController()
+        let navController = UINavigationController(rootViewController: legendVC)
+        navController.modalPresentationStyle = .popover
+        if let popoverPresentationController = navController.popoverPresentationController {
+            popoverPresentationController.barButtonItem = navigationItem.rightBarButtonItem
+        }
+        present(navController, animated: true, completion: nil)
     }
     
     private func fetchEarthquakeData() {

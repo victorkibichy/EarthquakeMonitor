@@ -5,10 +5,9 @@
 //  Created by  Bouncy Baby on 6/14/24.
 //
 
-import Foundation
 import UIKit
 
-class LegendView: UIView {
+class LegendViewController: UIViewController {
     
     // Initialize legend items (colors and descriptions)
     private let items: [(color: UIColor, description: String)] = [
@@ -20,41 +19,48 @@ class LegendView: UIView {
     ]
     
     // Initialization
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         setupView()
     }
     
     // Setup the legend view
     private func setupView() {
-        backgroundColor = UIColor.white.withAlphaComponent(0.9)
-        layer.cornerRadius = 10
-        layer.masksToBounds = true
+        view.backgroundColor = UIColor.white.withAlphaComponent(0.9)
+        view.layer.cornerRadius = 10
+        view.layer.masksToBounds = true
         
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.alignment = .leading
+        stackView.alignment = .fill  // Adjusted alignment to fill
         stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
-        addSubview(stackView)
+        view.addSubview(stackView)
+        
+        // Add constraints to stackView
+        let topConstraint = stackView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10)
+        let leadingConstraint = stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10)
+        let trailingConstraint = stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10)
+        let bottomConstraint = stackView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -10)
+        bottomConstraint.priority = .defaultHigh  // Lower priority to allow height to be determined by content
         
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: topAnchor, constant: 10),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10)
+            topConstraint,
+            leadingConstraint,
+            trailingConstraint,
+            bottomConstraint
         ])
         
         // Add legend items to the stack view
-        for item in items {
+        for (index, item) in items.enumerated() {
             let legendItem = createLegendItem(color: item.color, description: item.description)
             stackView.addArrangedSubview(legendItem)
+            
+            // Add equal height constraint to ensure last item stretches
+            if index == items.count - 1 {
+                legendItem.heightAnchor.constraint(greaterThanOrEqualToConstant: 0).isActive = true
+            }
         }
     }
     
@@ -81,13 +87,15 @@ class LegendView: UIView {
         let descriptionLabel = UILabel()
         descriptionLabel.text = description
         descriptionLabel.font = UIFont.systemFont(ofSize: 14)
+        descriptionLabel.numberOfLines = 0  // Allow multiline descriptions
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         legendItemView.addSubview(descriptionLabel)
         
         NSLayoutConstraint.activate([
             descriptionLabel.leadingAnchor.constraint(equalTo: colorView.trailingAnchor, constant: 8),
             descriptionLabel.trailingAnchor.constraint(equalTo: legendItemView.trailingAnchor),
-            descriptionLabel.centerYAnchor.constraint(equalTo: colorView.centerYAnchor)
+            descriptionLabel.topAnchor.constraint(equalTo: legendItemView.topAnchor),
+            descriptionLabel.bottomAnchor.constraint(equalTo: legendItemView.bottomAnchor)
         ])
         
         return legendItemView
