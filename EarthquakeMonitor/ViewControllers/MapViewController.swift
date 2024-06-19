@@ -13,7 +13,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     private var earthquakes: [Earthquake] = []
     private var mapTypeSegmentedControl: UISegmentedControl!
     private var compassButton: MKCompassButton!
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -41,23 +41,19 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         mapView.showsScale = true
         mapView.showsCompass = true
         
-        // Register the custom annotation view
-        mapView.register(EarthquakeAnnotationView.self, forAnnotationViewWithReuseIdentifier: EarthquakeAnnotationView.identifier)
-        
-        // Set delegate to self
         mapView.delegate = self
     }
     
     private func setupMapControls() {
         // Map type segmented control
         mapTypeSegmentedControl = UISegmentedControl(items: ["Standard", "Satellite", "Hybrid"])
-        mapTypeSegmentedControl.selectedSegmentIndex = 0 // Default to standard map type
+        mapTypeSegmentedControl.selectedSegmentIndex = 0
         mapTypeSegmentedControl.addTarget(self, action: #selector(mapTypeChanged(_:)), for: .valueChanged)
         navigationItem.titleView = mapTypeSegmentedControl
         
         // Compass button
         compassButton = MKCompassButton(mapView: mapView)
-        compassButton.compassVisibility = .visible // Always show compass
+        compassButton.compassVisibility = .visible
         mapView.addSubview(compassButton)
         
         // Legend button
@@ -90,6 +86,15 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         present(navController, animated: true, completion: nil)
     }
     
+    func didSelectEarthquake(_ earthquake: Earthquake) {
+        guard mapView != nil else {
+            print("Error: mapView is nil.")
+            return
+        }
+        
+        mapView.setCenter(CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0]), animated: true)
+    }
+    
     private func fetchEarthquakeData() {
         guard let url = URL(string: "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2022-01-01&endtime=2022-01-02") else {
             print("Invalid URL")
@@ -116,7 +121,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
                         )
                     }
                     
-                    self?.addAnnotations()
+                    self?.addAnnotations() // Call addAnnotations after data is fetched
                 }
             } catch {
                 print("Failed to decode earthquake data:", error)
@@ -127,37 +132,39 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     private func addAnnotations() {
-        mapView.removeAnnotations(mapView.annotations)
-        
-        for earthquake in earthquakes {
-            let annotation = MKPointAnnotation()
+            mapView.removeAnnotations(mapView.annotations)
             
-            guard earthquake.coordinates.count >= 2 else {
-                continue
+            for earthquake in earthquakes {
+                let annotation = MKPointAnnotation()
+                
+                guard earthquake.coordinates.count >= 2 else {
+                    continue
+                }
+                
+                annotation.coordinate = CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0])
+                annotation.title = "Magnitude: \(earthquake.magnitude)"
+                annotation.subtitle = earthquake.place
+                mapView.addAnnotation(annotation)
             }
             
-            annotation.coordinate = CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0])
-            annotation.title = "Magnitude: \(earthquake.magnitude)"
-            annotation.subtitle = earthquake.place
-            mapView.addAnnotation(annotation)
-        }
+            mapView.showAnnotations(mapView.annotations, animated: true)
         
-        mapView.showAnnotations(mapView.annotations, animated: true)
+        
+        
     }
     
-    // MKMapViewDelegate method to return the custom annotation view
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard let annotation = annotation as? MKPointAnnotation else { return nil }
-        
-        let identifier = EarthquakeAnnotationView.identifier
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? EarthquakeAnnotationView
-        
-        if annotationView == nil {
-            annotationView = EarthquakeAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-        } else {
-            annotationView?.annotation = annotation
-        }
-        
-        return annotationView
-    }
-}
+           guard let annotation = annotation as? MKPointAnnotation else { return nil }
+           
+           let identifier = EarthquakeAnnotationView.identifier
+           var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? EarthquakeAnnotationView
+           
+           if annotationView == nil {
+               annotationView = EarthquakeAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+           } else {
+               annotationView?.annotation = annotation
+           }
+           
+           return annotationView
+       }
+   }

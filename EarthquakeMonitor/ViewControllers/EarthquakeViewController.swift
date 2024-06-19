@@ -13,6 +13,7 @@ class EarthquakeViewController: UIViewController {
     private let tableView = UITableView()
     private let viewModel = EarthquakeViewModel()
     private var cancellables: Set<AnyCancellable> = []
+    private let mapView = MapViewController() // Instantiate MapViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class EarthquakeViewController: UIViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
+        tableView.delegate = self // Set delegate for handling row selection
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
@@ -62,8 +64,7 @@ class EarthquakeViewController: UIViewController {
     }
 }
 
-// thhis is the  Extension for table view data source
-extension EarthquakeViewController: UITableViewDataSource {
+extension EarthquakeViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.earthquakes.count
     }
@@ -77,15 +78,17 @@ extension EarthquakeViewController: UITableViewDataSource {
         let placeText = " ➡️ \(earthquake.place)"
         
         let attributedText = NSMutableAttributedString(string: magnitudeText + placeText)
-        
-        // Set TO RED color for magnitude component
         attributedText.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: 0, length: magnitudeText.count))
-        
-        // Set blue color for the rest of the text
         attributedText.addAttribute(.foregroundColor, value: UIColor.blue, range: NSRange(location: magnitudeText.count, length: placeText.count))
         
         cell.textLabel?.attributedText = attributedText
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let selectedEarthquake = viewModel.earthquakes[indexPath.row]
+        mapView.didSelectEarthquake(selectedEarthquake)
+        navigationController?.pushViewController(mapView, animated: true) // Navigate to map view
     }
 }
