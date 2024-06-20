@@ -6,7 +6,9 @@
 //
 
 
-import Foundation
+// EarthquakeViewController.swift
+// EarthquakeMonitor
+
 import UIKit
 import Combine
 
@@ -14,7 +16,7 @@ class EarthquakeViewController: UIViewController {
     private let tableView = UITableView()
     private let viewModel = EarthquakeViewModel()
     private var cancellables: Set<AnyCancellable> = []
-    private let mapView = MapViewController() // Instantiate MapViewController to enable navigation reference
+    private let mapView = MapViewController() // Reference to the MapViewController
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +32,7 @@ class EarthquakeViewController: UIViewController {
         
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.dataSource = self
-        tableView.delegate = self // Set delegate for handling row selection
+        tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(tableView)
         
@@ -41,7 +43,6 @@ class EarthquakeViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        // Add buttons to navigation bar
         addNavigationBarButtons()
     }
     
@@ -56,34 +57,27 @@ class EarthquakeViewController: UIViewController {
         searchButton.tintColor = UIColor.systemTeal
         navigationItem.leftBarButtonItem = searchButton
     }
-
     
     @objc private func sortButtonTapped() {
-        // This handles the sort button tap by presenting an action sheet with sorting options.
         let alert = UIAlertController(title: "Sort Options", message: "Sort earthquakes by:", preferredStyle: .actionSheet)
         
-        // Sort by magnitude option
         alert.addAction(UIAlertAction(title: "Magnitude", style: .default, handler: { [weak self] _ in
             self?.viewModel.sortEarthquakes(by: .magnitude)
         }))
         
-        // Sort by date option (default sorting)
         alert.addAction(UIAlertAction(title: "Date (Default)", style: .default, handler: { [weak self] _ in
             self?.viewModel.sortEarthquakes(by: .date)
         }))
         
-        // Cancel option with a teal color
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        cancelAction.setValue(UIColor.systemTeal, forKey: "titleTextColor") // Setting the color of the cancel button to teal
+        cancelAction.setValue(UIColor.systemTeal, forKey: "titleTextColor")
         
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
     }
 
-
     @objc private func searchButtonTapped() {
-        // Handle search button tap
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
@@ -124,17 +118,12 @@ extension EarthquakeViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let earthquake = viewModel.earthquakes[indexPath.row]
         
-        // Customize cell text with colored components
         let magnitudeText = "\(earthquake.magnitude)"
         let placeText = " ➡️ \(earthquake.place)"
         
-        // Create an attributed string
         let attributedText = NSMutableAttributedString(string: magnitudeText + placeText)
-        
-        // Set the color and font for the magnitude text
         attributedText.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: 0, length: magnitudeText.count))
         
-        // Determine the current interface style (light or dark mode)
         let placeColor: UIColor
         if traitCollection.userInterfaceStyle == .dark {
             placeColor = .white
@@ -142,24 +131,20 @@ extension EarthquakeViewController: UITableViewDataSource, UITableViewDelegate {
             placeColor = .black
         }
         
-        // Set the color and font for the place text
         attributedText.addAttribute(.foregroundColor, value: placeColor, range: NSRange(location: magnitudeText.count, length: placeText.count))
         
-        // Make the place text bold
         let boldFont = UIFont.boldSystemFont(ofSize: cell.textLabel?.font.pointSize ?? UIFont.systemFontSize)
         attributedText.addAttribute(.font, value: boldFont, range: NSRange(location: magnitudeText.count, length: placeText.count))
         
-        // Assign the attributed text to the cell's textLabel
         cell.textLabel?.attributedText = attributedText
         
         return cell
     }
 
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedEarthquake = viewModel.earthquakes[indexPath.row]
         mapView.didSelectEarthquake(selectedEarthquake)
-        navigationController?.pushViewController(mapView, animated: true) //function to Navigate to map view to the indexed annotation
+        navigationController?.pushViewController(mapView, animated: true)
     }
 }
 

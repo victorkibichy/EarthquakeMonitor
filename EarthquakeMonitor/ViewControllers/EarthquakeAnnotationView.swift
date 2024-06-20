@@ -5,7 +5,6 @@
 //  Created by  Bouncy Baby on 6/14/24.
 //
 
-// EarthquakeAnnotationView.swift
 import MapKit
 
 class EarthquakeAnnotationView: MKMarkerAnnotationView {

@@ -96,7 +96,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     private func fetchEarthquakeData() {
-        guard let url = URL(string: "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2022-01-01&endtime=2022-01-02") else {
+        guard let url = URL(string: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson") else {
             print("Invalid URL")
             return
         }
