@@ -5,10 +5,6 @@
 //  Created by  Bouncy Baby on 6/12/24.
 //
 
-
-// EarthquakeViewController.swift
-// EarthquakeMonitor
-
 import UIKit
 import Combine
 
@@ -118,12 +114,18 @@ extension EarthquakeViewController: UITableViewDataSource, UITableViewDelegate {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let earthquake = viewModel.earthquakes[indexPath.row]
         
-        let magnitudeText = "\(earthquake.magnitude)"
+        // Format magnitude to one decimal place and make it bold
+        let magnitudeText = String(format: "%.1f", earthquake.magnitude)
         let placeText = " ➡️ \(earthquake.place)"
         
         let attributedText = NSMutableAttributedString(string: magnitudeText + placeText)
-        attributedText.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: 0, length: magnitudeText.count))
         
+        // Apply red color and bold font to the magnitude part
+        let boldFont = UIFont.boldSystemFont(ofSize: cell.textLabel?.font.pointSize ?? UIFont.systemFontSize)
+        attributedText.addAttribute(.foregroundColor, value: UIColor.red, range: NSRange(location: 0, length: magnitudeText.count))
+        attributedText.addAttribute(.font, value: boldFont, range: NSRange(location: 0, length: magnitudeText.count))
+        
+        // Determine place text color based on user interface style (light or dark mode)
         let placeColor: UIColor
         if traitCollection.userInterfaceStyle == .dark {
             placeColor = .white
@@ -131,9 +133,10 @@ extension EarthquakeViewController: UITableViewDataSource, UITableViewDelegate {
             placeColor = .black
         }
         
+        // Apply place text color
         attributedText.addAttribute(.foregroundColor, value: placeColor, range: NSRange(location: magnitudeText.count, length: placeText.count))
         
-        let boldFont = UIFont.boldSystemFont(ofSize: cell.textLabel?.font.pointSize ?? UIFont.systemFontSize)
+        // Apply bold font to the place part
         attributedText.addAttribute(.font, value: boldFont, range: NSRange(location: magnitudeText.count, length: placeText.count))
         
         cell.textLabel?.attributedText = attributedText
