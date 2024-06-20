@@ -40,7 +40,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let earthquakeVC = EarthquakeViewController()
         earthquakeVC.title = "Earthquakes"
         // Set the tab bar item with a world icon
-        earthquakeVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "globe"), tag: 0)
+        earthquakeVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "map"), tag: 0)
         return UINavigationController(rootViewController: earthquakeVC)
     }
 
@@ -48,7 +48,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let mapVC = MapViewController()
         mapVC.title = "View Map"
         // Set the tab bar item with a map icon
-        mapVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "map"), tag: 1)
+        mapVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "globe"), tag: 1)
         return UINavigationController(rootViewController: mapVC)
     }
 

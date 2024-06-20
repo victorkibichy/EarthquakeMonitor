@@ -1,4 +1,3 @@
-//
 //  EarthquakeViewModel.swift
 //  EarthquakeMonitor
 //
@@ -10,9 +9,11 @@ import Combine
 
 class EarthquakeViewModel {
     @Published var earthquakes: [Earthquake] = []
-    @Published var errorMessage: String? // To communicate errors to the UI(THE USER)
+    @Published var errorMessage: String? // To communicate errors to the UI
     private var cancellables: Set<AnyCancellable> = []
-    
+    private var allEarthquakes: [Earthquake] = [] // Store all earthquakes to support search functionality
+
+    // Fetch earthquakes from the USGS API
     func fetchEarthquakes() {
         let urlString = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=2022-01-01&endtime=2022-01-02"
         guard let url = URL(string: urlString) else {
@@ -44,53 +45,62 @@ class EarthquakeViewModel {
                 case .finished:
                     break
                 case .failure(let error):
-                    
-                    
-        // Handle specific error types and set appropriate error messages
+                    // Handle specific error types and set appropriate error messages
                     self?.handleError(error)
                 }
             }, receiveValue: { [weak self] earthquakes in
+                self?.allEarthquakes = earthquakes
                 self?.earthquakes = earthquakes
             })
             .store(in: &cancellables)
     }
     
+    // Handle different types of errors
     private func handleError(_ error: Error) {
-        // CATEGORIES OF ERRORS
-        
-        
-        
-        
         if let urlError = error as? URLError {
-            
             switch urlError.code {
-                
             case .notConnectedToInternet:
                 errorMessage = ErrorType.notConnectedToInternet.rawValue
-                
             case .timedOut:
                 errorMessage = ErrorType.timedOut.rawValue
-                
             case .cannotFindHost:
                 errorMessage = ErrorType.cannotFindHost.rawValue
-                
-                
             case .badServerResponse:
                 errorMessage = ErrorType.badServerResponse.rawValue
-                
             default:
                 errorMessage = "An unexpected error occurred: \(urlError.localizedDescription)"
             }
-            
-        }
-        
-        else if let decodingError = error as? DecodingError {
+        } else if let decodingError = error as? DecodingError {
             errorMessage = "Failed to parse earthquake data. Please try again."
-        }
-        
-        else {
+        } else {
             errorMessage = "An unknown error occurred: \(error.localizedDescription)"
         }
         print(errorMessage ?? "Unknown error")
     }
+    
+    // Sort earthquakes based on the specified criterion
+    func sortEarthquakes(by criterion: SortCriterion) {
+        switch criterion {
+        case .magnitude:
+            earthquakes.sort { $0.magnitude > $1.magnitude }
+        case .date:
+            earthquakes.sort { $0.time > $1.time }
+        }
+    }
+    
+    // Search for earthquakes based on the place name
+    func searchEarthquakes(by query: String) {
+        earthquakes = allEarthquakes.filter { $0.place.lowercased().contains(query.lowercased()) }
+    }
+    
+    // Reset the search to show all earthquakes
+    func resetSearch() {
+        earthquakes = allEarthquakes
+    }
 }
+
+enum SortCriterion {
+    case magnitude
+    case date
+}
+
