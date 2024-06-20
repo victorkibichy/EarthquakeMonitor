@@ -66,13 +66,19 @@ Usage
 
 The main screen displays a list of recent earthquakes.
 Each cell shows the magnitude (in red) and location (in blue) of the earthquake.
-**Map View:
-**
+**Map View:**
 ![Simulator Screenshot - iPhone 14 Pro Max - 2024-06-14 at 11 24 15](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/dc48a760-faac-489b-85b8-7854e338c3f4)
 
-**UPDATED MAP WITH annotations **
+**UPDATED MAP WITH annotations**
 
 ![Simulator Screenshot - iPhone 14 Pro - 2024-06-14 at 12 23 59](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/046bc57c-767b-44c4-99e0-fc97a0cc5000)
+
+**UPDATED MAP WITH annotations explained in a legend**
+![Simulator Screenshot - iPhone 14 Pro Max - 2024-06-20 at 08 21 16](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/b870a391-8f38-4196-901b-01f3cf378228)
+
+**custom legend explanation** 
+![Simulator Screenshot - iPhone 14 Pro Max - 2024-06-20 at 08 21 22](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/b7555bf6-f56b-4567-a89a-e75335ee6a9e)
+
 
 
 
