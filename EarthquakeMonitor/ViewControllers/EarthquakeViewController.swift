@@ -48,12 +48,15 @@ class EarthquakeViewController: UIViewController {
     private func addNavigationBarButtons() {
         // Sort button on the top right
         let sortButton = UIBarButtonItem(title: "Sort", style: .plain, target: self, action: #selector(sortButtonTapped))
+        sortButton.tintColor = UIColor.systemTeal
         navigationItem.rightBarButtonItem = sortButton
         
         // Search button on the top left
         let searchButton = UIBarButtonItem(barButtonSystemItem: .search, target: self, action: #selector(searchButtonTapped))
+        searchButton.tintColor = UIColor.systemTeal
         navigationItem.leftBarButtonItem = searchButton
     }
+
     
     @objc private func sortButtonTapped() {
         // this is to Handle sort button tap
