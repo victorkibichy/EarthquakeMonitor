@@ -9,9 +9,9 @@ import Combine
 
 class EarthquakeViewModel {
     @Published var earthquakes: [Earthquake] = []
-    @Published var errorMessage: String? // To communicate errors to the UI
+    @Published var errorMessage: String? // To communicate errors to the User
     private var cancellables: Set<AnyCancellable> = []
-    private var allEarthquakes: [Earthquake] = [] // Store all earthquakes to support search functionality
+    private var allEarthquakes: [Earthquake] = [] // an array to Store all earthquakes to support search functionality
 
     // Fetch earthquakes from the USGS API
     func fetchEarthquakes() {
@@ -78,11 +78,15 @@ class EarthquakeViewModel {
         print(errorMessage ?? "Unknown error")
     }
     
-    // Sort earthquakes based on the specified criterion
+    // Sorting earthquakes based on the specified criterion
     func sortEarthquakes(by criterion: SortCriterion) {
         switch criterion {
+//            for sorting by magnitude of appearance
         case .magnitude:
             earthquakes.sort { $0.magnitude > $1.magnitude }
+            
+//            for sorting by date of appearance
+
         case .date:
             earthquakes.sort { $0.time > $1.time }
         }
