@@ -112,9 +112,5 @@ Combine: Used for reactive programming and handling asynchronous tasks.
 MapKit: For map functionalities and displaying earthquake locations.
 Security
 
-API Security: No API keys are used in this project. However, ensure any sensitive information is securely managed if required.
-Networking: All network requests use HTTPS to ensure data security and integrity.
-Testing
 
-Unit Testing: Implement tests for ViewModel logic to ensure correct data processing.
-UI Testing: Use XCUITest to verify the UI components function as expected.
+
