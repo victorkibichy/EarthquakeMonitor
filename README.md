@@ -79,6 +79,14 @@ Each cell shows the magnitude (in red) and location (in blue) of the earthquake.
 **custom legend explanation** 
 ![Simulator Screenshot - iPhone 14 Pro Max - 2024-06-20 at 08 21 22](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/b7555bf6-f56b-4567-a89a-e75335ee6a9e)
 
+**UPDATED SCREENS(incorporating user locations)**
+
+![IMG_2624](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/1310eafc-24d8-47d5-ad80-488296fe811a)
+![IMG_2625](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/761abe6f-b5d0-44f8-b204-3f71f1877baf)
+![IMG_2626](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/0ddaf817-519f-4f54-bc3a-fa1ed3501b2a)
+![IMG_2627](https://github.com/victorkibichy/EarthquakeMonitor/assets/155962239/9261d52f-b2be-47d6-adf8-4405e98143f2)
+
+
 
 
 
