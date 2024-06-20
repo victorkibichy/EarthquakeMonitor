@@ -56,12 +56,12 @@ class EarthquakeViewController: UIViewController {
     }
     
     @objc private func sortButtonTapped() {
-        // Handle sort button tap
+        // this is to Handle sort button tap
         let alert = UIAlertController(title: "Sort Options", message: "Sort earthquakes by:", preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Magnitude", style: .default, handler: { [weak self] _ in
             self?.viewModel.sortEarthquakes(by: .magnitude)
         }))
-        alert.addAction(UIAlertAction(title: "Date", style: .default, handler: { [weak self] _ in
+        alert.addAction(UIAlertAction(title: "Date (Default)", style: .default, handler: { [weak self] _ in
             self?.viewModel.sortEarthquakes(by: .date)
         }))
         alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
