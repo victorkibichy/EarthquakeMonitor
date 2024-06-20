@@ -59,19 +59,29 @@ class EarthquakeViewController: UIViewController {
 
     
     @objc private func sortButtonTapped() {
-        // this is to Handle sort button tap
+        // This handles the sort button tap by presenting an action sheet with sorting options.
         let alert = UIAlertController(title: "Sort Options", message: "Sort earthquakes by:", preferredStyle: .actionSheet)
+        
+        // Sort by magnitude option
         alert.addAction(UIAlertAction(title: "Magnitude", style: .default, handler: { [weak self] _ in
             self?.viewModel.sortEarthquakes(by: .magnitude)
         }))
+        
+        // Sort by date option (default sorting)
         alert.addAction(UIAlertAction(title: "Date (Default)", style: .default, handler: { [weak self] _ in
             self?.viewModel.sortEarthquakes(by: .date)
         }))
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         
-        present(alert, animated: true)
+        // Cancel option with a teal color
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        cancelAction.setValue(UIColor.systemTeal, forKey: "titleTextColor") // Setting the color of the cancel button to teal
+        
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
-    
+
+
     @objc private func searchButtonTapped() {
         // Handle search button tap
         let searchController = UISearchController(searchResultsController: nil)
