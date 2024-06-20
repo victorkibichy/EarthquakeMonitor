@@ -110,7 +110,7 @@ Dependencies
 
 Combine: Used for reactive programming and handling asynchronous tasks.
 MapKit: For map functionalities and displaying earthquake locations.
-Security
+
 
 
 
