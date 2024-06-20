@@ -5,18 +5,11 @@
 //  Created by  Bouncy Baby on 6/14/24.
 //
 
+import Foundation
 import UIKit
 
 class LegendViewController: UIViewController {
-    
-    // Initialize legend items (colors and descriptions)
-    private let items: [(color: UIColor, description: String)] = [
-        (.blue, "Magnitude < 2.0: Light Earthquake"),
-        (.green, "Magnitude 2.0 - 3.9: Minor Earthquake"),
-        (.orange, "Magnitude 4.0 - 5.9: Moderate Earthquake"),
-        (.red, "Magnitude 6.0 - 6.9: Strong Earthquake"),
-        (.purple, "Magnitude ≥ 7.0: Major Earthquake")
-    ]
+    private let viewModel = LegendViewModel()
     
     // Title label
     private let titleLabel: UILabel = {
@@ -73,9 +66,11 @@ class LegendViewController: UIViewController {
         stackView.addArrangedSubview(dismissStackView)
         
         // Add legend items to the stack view
-        for item in items {
-            let legendItem = createLegendItem(color: item.color, description: item.description)
-            stackView.addArrangedSubview(legendItem)
+        for index in 0..<viewModel.numberOfItems {
+            if let item = viewModel.item(at: index) {
+                let legendItem = createLegendItem(color: item.color, description: item.description)
+                stackView.addArrangedSubview(legendItem)
+            }
         }
         
         // Calculate half of the screen height

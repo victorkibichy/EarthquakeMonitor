@@ -2,17 +2,19 @@
 //  MapViewController.swift
 //  EarthquakeMonitor
 //
-//  Created by  Bouncy Baby on 6/12/24.
+//  Created by Bouncy Baby on 6/12/24.
 //
 
 import UIKit
 import MapKit
+import CoreLocation // Import CoreLocation to handle user location
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     var mapView: MKMapView!
     private var earthquakes: [Earthquake] = []
     private var mapTypeSegmentedControl: UISegmentedControl!
     private var compassButton: MKCompassButton!
+    private let locationManager = CLLocationManager() // Location manager to handle user location
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +23,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         setupMapView()
         setupMapControls()
+        setupLocationManager() // Setup location manager
         fetchEarthquakeData()
     }
     
@@ -36,7 +39,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        mapView.showsUserLocation = true
+        mapView.showsUserLocation = true // Show user location on the map
         mapView.showsTraffic = true
         mapView.showsScale = true
         mapView.showsCompass = true
@@ -61,6 +64,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         legendButton.addTarget(self, action: #selector(showLegend), for: .touchUpInside)
         let legendBarItem = UIBarButtonItem(customView: legendButton)
         navigationItem.rightBarButtonItem = legendBarItem
+        
+        // Removed the center on user location button
+    }
+    
+    private func setupLocationManager() {
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.requestWhenInUseAuthorization() // Request location access
     }
     
     @objc private func mapTypeChanged(_ sender: UISegmentedControl) {
@@ -132,39 +143,55 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     }
     
     private func addAnnotations() {
-            mapView.removeAnnotations(mapView.annotations)
+        mapView.removeAnnotations(mapView.annotations)
+        
+        for earthquake in earthquakes {
+            let annotation = MKPointAnnotation()
             
-            for earthquake in earthquakes {
-                let annotation = MKPointAnnotation()
-                
-                guard earthquake.coordinates.count >= 2 else {
-                    continue
-                }
-                
-                annotation.coordinate = CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0])
-                annotation.title = "Magnitude: \(earthquake.magnitude)"
-                annotation.subtitle = earthquake.place
-                mapView.addAnnotation(annotation)
+            guard earthquake.coordinates.count >= 2 else {
+                continue
             }
             
-            mapView.showAnnotations(mapView.annotations, animated: true)
+            annotation.coordinate = CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0])
+            annotation.title = "Magnitude: \(earthquake.magnitude)"
+            annotation.subtitle = earthquake.place
+            mapView.addAnnotation(annotation)
+        }
         
-        
-        
+        mapView.showAnnotations(mapView.annotations, animated: true)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-           guard let annotation = annotation as? MKPointAnnotation else { return nil }
-           
-           let identifier = EarthquakeAnnotationView.identifier
-           var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? EarthquakeAnnotationView
-           
-           if annotationView == nil {
-               annotationView = EarthquakeAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-           } else {
-               annotationView?.annotation = annotation
-           }
-           
-           return annotationView
-       }
-   }
+        guard let annotation = annotation as? MKPointAnnotation else { return nil }
+        
+        let identifier = EarthquakeAnnotationView.identifier
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? EarthquakeAnnotationView
+        
+        if annotationView == nil {
+            annotationView = EarthquakeAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+        } else {
+            annotationView?.annotation = annotation
+        }
+        
+        return annotationView
+    }
+    
+    // CLLocationManagerDelegate method to handle authorization changes
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        switch status {
+        case .authorizedWhenInUse, .authorizedAlways:
+            locationManager.startUpdatingLocation()
+        case .denied, .restricted:
+            // Handle denied access to location
+            showLocationAccessDeniedAlert()
+        default:
+            break
+        }
+    }
+    
+    private func showLocationAccessDeniedAlert() {
+        let alert = UIAlertController(title: "Location Access Denied", message: "To use this feature, please enable location access in Settings.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default))
+        present(alert, animated: true)
+    }
+}
