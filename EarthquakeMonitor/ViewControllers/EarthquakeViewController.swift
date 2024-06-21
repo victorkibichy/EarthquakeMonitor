@@ -7,6 +7,7 @@
 
 import UIKit
 import Combine
+import Network
 
 class EarthquakeViewController: UIViewController {
     private let tableView = UITableView()
@@ -14,11 +15,15 @@ class EarthquakeViewController: UIViewController {
     private var cancellables: Set<AnyCancellable> = []
     private let mapView = MapViewController() // Reference to the MapViewController
     
+    // Define the refresh control
+    private let refreshControl = UIRefreshControl()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         setupUI()
         bindViewModel()
+        setupNetworkMonitoring()
         viewModel.fetchEarthquakes()
     }
     
@@ -38,6 +43,12 @@ class EarthquakeViewController: UIViewController {
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        // Add refresh control to the table view
+        tableView.refreshControl = refreshControl
+        refreshControl.addTarget(self, action: #selector(refreshData(_:)), for: .valueChanged)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh")
+        refreshControl.tintColor = .gray
         
         addNavigationBarButtons()
     }
@@ -82,6 +93,15 @@ class EarthquakeViewController: UIViewController {
         navigationItem.hidesSearchBarWhenScrolling = false
     }
     
+    @objc private func refreshData(_ sender: Any) {
+        viewModel.fetchEarthquakes()
+        
+        // End refreshing after data is fetched
+        DispatchQueue.main.async {
+            self.refreshControl.endRefreshing()
+        }
+    }
+    
     private func bindViewModel() {
         viewModel.$earthquakes
             .receive(on: DispatchQueue.main)
@@ -102,6 +122,24 @@ class EarthquakeViewController: UIViewController {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    
+    private func setupNetworkMonitoring() {
+        let monitor = NWPathMonitor()
+        let queue = DispatchQueue.global(qos: .background)
+        
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                // Network connection is back, optionally refresh data
+                DispatchQueue.main.async {
+                    self.refreshData(self.refreshControl)
+                }
+            } else {
+                // No network connection, handle accordingly
+            }
+        }
+        
+        monitor.start(queue: queue)
     }
 }
 

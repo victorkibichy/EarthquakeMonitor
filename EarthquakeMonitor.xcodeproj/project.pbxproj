@@ -56,6 +56,8 @@
 		05C785732C244B9E008C05E6 /* LegendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C785722C244B9E008C05E6 /* LegendViewModel.swift */; };
 		05C785742C244B9E008C05E6 /* LegendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C785722C244B9E008C05E6 /* LegendViewModel.swift */; };
 		05C785752C244B9E008C05E6 /* LegendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05C785722C244B9E008C05E6 /* LegendViewModel.swift */; };
+		05C785762C245231008C05E6 /* EarthquakeMonitor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD62C199B2800CFDEEE /* EarthquakeMonitor.xcdatamodeld */; };
+		05C785772C245232008C05E6 /* EarthquakeMonitor.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 057AAFD62C199B2800CFDEEE /* EarthquakeMonitor.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -401,6 +403,7 @@
 				05961E6F2C1C81D500C36B2F /* LegendViewController.swift in Sources */,
 				05C785702C244B5B008C05E6 /* LegendItem.swift in Sources */,
 				057AB00C2C19A31100CFDEEE /* EarthquakeViewModel.swift in Sources */,
+				05C785762C245231008C05E6 /* EarthquakeMonitor.xcdatamodeld in Sources */,
 				057AB01D2C19BA3700CFDEEE /* MapViewController.swift in Sources */,
 				05C785742C244B9E008C05E6 /* LegendViewModel.swift in Sources */,
 				05961E672C1C7EB700C36B2F /* EarthquakeAnnotation.swift in Sources */,
@@ -423,6 +426,7 @@
 				057AB01C2C19ACE200CFDEEE /* AppDelegate.swift in Sources */,
 				0574E3252C21BC9700F06AA8 /* EarthquakeTableViewCell.swift in Sources */,
 				05961E682C1C7EB700C36B2F /* EarthquakeAnnotation.swift in Sources */,
+				05C785772C245232008C05E6 /* EarthquakeMonitor.xcdatamodeld in Sources */,
 				054D03BD2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */,
 				05961E6C2C1C7FB200C36B2F /* EarthquakeAnnotationView.swift in Sources */,
 				05C785752C244B9E008C05E6 /* LegendViewModel.swift in Sources */,
