@@ -103,8 +103,34 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             return
         }
         
-        mapView.setCenter(CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0]), animated: true)
+        let coordinate = CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0])
+        
+        // Calculate the span (region size)
+        let span = MKCoordinateSpan(latitudeDelta: 0.018, longitudeDelta: 0.018)
+        
+        // Create a region centered on the selected earthquake
+        let region = MKCoordinateRegion(center: coordinate, span: span)
+        
+        // Set the region on the map view
+        mapView.setRegion(region, animated: true)
+        
+        // Optionally, add an enlarged annotation
+        addEnlargedAnnotation(for: earthquake)
     }
+
+    private func addEnlargedAnnotation(for earthquake: Earthquake) {
+        let annotation = MKPointAnnotation()
+        annotation.coordinate = CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0])
+        annotation.title = "Magnitude: \(earthquake.magnitude)"
+        annotation.subtitle = earthquake.place
+        
+        mapView.removeAnnotations(mapView.annotations)
+        mapView.addAnnotation(annotation)
+        
+        // Select the annotation to display the callout immediately
+        mapView.selectAnnotation(annotation, animated: true)
+    }
+
     
     private func fetchEarthquakeData() {
         guard let url = URL(string: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson") else {
