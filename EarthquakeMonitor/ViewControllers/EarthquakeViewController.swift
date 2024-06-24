@@ -113,15 +113,16 @@ class EarthquakeViewController: UIViewController {
         viewModel.$errorMessage
             .compactMap { $0 }
             .sink { [weak self] errorMessage in
-                self?.presentAlert(message: errorMessage)
+                self?.presentCustomAlert(title: "Error", message: errorMessage, buttonTitle: "OK")
             }
             .store(in: &cancellables)
     }
     
-    private func presentAlert(message: String) {
-        let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+    private func presentCustomAlert(title: String, message: String, buttonTitle: String) {
+        let alertVC = EMAlertVC(title: title, message: message, buttonTitle: buttonTitle)
+        alertVC.modalPresentationStyle = .overFullScreen
+        alertVC.modalTransitionStyle = .crossDissolve
+        present(alertVC, animated: true)
     }
     
     private func setupNetworkMonitoring() {

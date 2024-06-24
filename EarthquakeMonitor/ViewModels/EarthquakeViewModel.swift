@@ -11,7 +11,7 @@ class EarthquakeViewModel {
     private var allEarthquakes: [Earthquake] = []
     
     func fetchEarthquakes() {
-        let urlString = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
+        let urlString = "https://earthquakeson"
         guard let url = URL(string: urlString) else {
             errorMessage = "Invalid URL"
             return

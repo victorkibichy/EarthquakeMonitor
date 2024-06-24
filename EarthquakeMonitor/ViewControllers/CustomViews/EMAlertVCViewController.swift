@@ -10,12 +10,12 @@ import UIKit
 class EMAlertVC: UIViewController {
     
     let containerView = UIView()
-    let titleLabel = EMTitleLabel(textAlignment: .center, fontsize: 20)
-    let messageLabel = EMBodyLabel(textAlignment: .center)
-    let actionButton = EMButton(backgroundColor: .systemTeal, title: "OK")
+    let titleLabel = EMTitleLabel(textAlignment: .center, fontSize:20)
+    let messageLabel = EMBodyLabel(textAlignment: .center, fontSize: 20)
+    let actionButton = EMButton(backgroundColor: .systemPink, title: "OK")
+              
     
-    
-    var alertTitle: String?
+    var aletTitle: String?
     var message: String?
     var buttonTitle: String?
     
@@ -23,7 +23,7 @@ class EMAlertVC: UIViewController {
     
     init(title: String, message: String, buttonTitle: String) {
         super.init(nibName: nil, bundle: nil)
-        self.alertTitle = title
+        self.aletTitle = title
         self.message = message
         self.buttonTitle = buttonTitle
     }
@@ -32,15 +32,15 @@ class EMAlertVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.75)
-        
-        configureContainerView()
+            configureContainerView()
         configureTitleLabel()
         configureActionButton()
-       
+        configureMessageLabel()
+        
+        
     }
     
     func configureContainerView() {
@@ -48,42 +48,31 @@ class EMAlertVC: UIViewController {
         containerView.backgroundColor = .systemBackground
         containerView.layer.cornerRadius = 16
         containerView.layer.borderWidth = 2
-        containerView.layer.borderColor = UIColor.white.cgColor
+        containerView.layer.borderColor  = UIColor.white.cgColor
         containerView.translatesAutoresizingMaskIntoConstraints = false
         
-        NSLayoutConstraint.activate([
         
+        NSLayoutConstraint.activate([
             containerView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             containerView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             containerView.widthAnchor.constraint(equalToConstant: 280),
             containerView.heightAnchor.constraint(equalToConstant: 220)
-        
-        
-                            ])
-        
-
-        
+            
+        ])
     }
-    func configureTitleLabel() {
         
-        
-        containerView.addSubview(titleLabel)
-        titleLabel.text = alertTitle ?? "Something went Wrong"
-        
-        NSLayoutConstraint.activate([
-        
-            titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: padding),
-            titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: padding),
-            titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -padding),
-            titleLabel.heightAnchor.constraint(equalToConstant: 28)
-        
-        
-                            ])
-        
-
-        
-    }
-    
+        func configureTitleLabel() {
+            containerView.addSubview(titleLabel)
+            titleLabel.text = aletTitle ?? "Something Went Wrong"
+            
+            NSLayoutConstraint.activate([
+            
+                titleLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: padding),
+                titleLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: padding),
+                titleLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -padding),
+                titleLabel.heightAnchor.constraint(equalToConstant: 28)
+                                    ])
+            }
     
     func configureActionButton() {
         
@@ -101,7 +90,6 @@ class EMAlertVC: UIViewController {
         
     }
     
-    
     func configureMessageLabel() {
         
         containerView.addSubview(messageLabel)
@@ -117,11 +105,18 @@ class EMAlertVC: UIViewController {
             messageLabel.bottomAnchor.constraint(equalTo: actionButton.topAnchor, constant: -12)
                 ])
     }
+        
+    
+    
     
   @objc func dismissVC() {
         dismiss(animated: true)
     }
 }
+
+
+
+
 
 
 

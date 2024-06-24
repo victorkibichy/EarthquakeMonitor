@@ -11,13 +11,16 @@ class EMBodyLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        configure()
     }
+    
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(textAlignment: NSTextAlignment) {
+    
+    init(textAlignment: NSTextAlignment, fontSize: CGFloat) {
         super.init(frame: .zero)
         self.textAlignment = textAlignment
         configure()
@@ -30,9 +33,9 @@ class EMBodyLabel: UILabel {
         minimumScaleFactor = 0.75
         lineBreakMode = .byWordWrapping
         translatesAutoresizingMaskIntoConstraints = false
+       
         
     }
+    
+    
 }
-
-
-
