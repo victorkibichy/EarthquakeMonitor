@@ -53,6 +53,9 @@
 		057B7D5F2C296BF800805E50 /* EMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B7D5E2C296BF800805E50 /* EMButton.swift */; };
 		057B7D602C296BF800805E50 /* EMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B7D5E2C296BF800805E50 /* EMButton.swift */; };
 		057B7D612C296BF800805E50 /* EMButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B7D5E2C296BF800805E50 /* EMButton.swift */; };
+		057B7D632C297AFB00805E50 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B7D622C297AFB00805E50 /* UIViewController+Ext.swift */; };
+		057B7D642C297AFB00805E50 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B7D622C297AFB00805E50 /* UIViewController+Ext.swift */; };
+		057B7D652C297AFB00805E50 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057B7D622C297AFB00805E50 /* UIViewController+Ext.swift */; };
 		05961E662C1C7EB700C36B2F /* EarthquakeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05961E652C1C7EB700C36B2F /* EarthquakeAnnotation.swift */; };
 		05961E672C1C7EB700C36B2F /* EarthquakeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05961E652C1C7EB700C36B2F /* EarthquakeAnnotation.swift */; };
 		05961E682C1C7EB700C36B2F /* EarthquakeAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05961E652C1C7EB700C36B2F /* EarthquakeAnnotation.swift */; };
@@ -114,6 +117,7 @@
 		057B7D562C29683800805E50 /* EMBodyLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EMBodyLabel.swift; sourceTree = "<group>"; };
 		057B7D5A2C296ADC00805E50 /* EMAlertVCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EMAlertVCViewController.swift; sourceTree = "<group>"; };
 		057B7D5E2C296BF800805E50 /* EMButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EMButton.swift; sourceTree = "<group>"; };
+		057B7D622C297AFB00805E50 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 		05961E652C1C7EB700C36B2F /* EarthquakeAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthquakeAnnotation.swift; sourceTree = "<group>"; };
 		05961E692C1C7FB200C36B2F /* EarthquakeAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthquakeAnnotationView.swift; sourceTree = "<group>"; };
 		05961E6D2C1C81D500C36B2F /* LegendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegendViewController.swift; sourceTree = "<group>"; };
@@ -160,8 +164,8 @@
 				057B7D562C29683800805E50 /* EMBodyLabel.swift */,
 				057B7D522C29635D00805E50 /* EMtitlebel.swift */,
 				057B7D5A2C296ADC00805E50 /* EMAlertVCViewController.swift */,
-				057B7D512C2962EB00805E50 /* Cells */,
 				057B7D5E2C296BF800805E50 /* EMButton.swift */,
+				057B7D512C2962EB00805E50 /* Cells */,
 			);
 			path = CustomViews;
 			sourceTree = "<group>";
@@ -256,6 +260,7 @@
 				05961E692C1C7FB200C36B2F /* EarthquakeAnnotationView.swift */,
 				05961E6D2C1C81D500C36B2F /* LegendViewController.swift */,
 				0574E3212C21BC1300F06AA8 /* CustomViews */,
+				057B7D662C297B1600805E50 /* Custom View Extensions */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -267,6 +272,14 @@
 				0574E3222C21BC9700F06AA8 /* EarthquakeTableViewCell.swift */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		057B7D662C297B1600805E50 /* Custom View Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				057B7D622C297AFB00805E50 /* UIViewController+Ext.swift */,
+			);
+			path = "Custom View Extensions";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -401,6 +414,7 @@
 			files = (
 				057AB0042C19A1E400CFDEEE /* Earthquake.swift in Sources */,
 				05961E6E2C1C81D500C36B2F /* LegendViewController.swift in Sources */,
+				057B7D632C297AFB00805E50 /* UIViewController+Ext.swift in Sources */,
 				0574E3272C21BD9700F06AA8 /* EarthquakeDetailViewController.swift in Sources */,
 				057B7D5F2C296BF800805E50 /* EMButton.swift in Sources */,
 				057AB00B2C19A31100CFDEEE /* EarthquakeViewModel.swift in Sources */,
@@ -428,6 +442,7 @@
 			files = (
 				05961E6B2C1C7FB200C36B2F /* EarthquakeAnnotationView.swift in Sources */,
 				054D03BC2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */,
+				057B7D642C297AFB00805E50 /* UIViewController+Ext.swift in Sources */,
 				0574E3242C21BC9700F06AA8 /* EarthquakeTableViewCell.swift in Sources */,
 				057B7D602C296BF800805E50 /* EMButton.swift in Sources */,
 				057AB01B2C19ACE100CFDEEE /* AppDelegate.swift in Sources */,
@@ -467,6 +482,7 @@
 				05C785772C245232008C05E6 /* EarthquakeMonitor.xcdatamodeld in Sources */,
 				054D03BD2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */,
 				05961E6C2C1C7FB200C36B2F /* EarthquakeAnnotationView.swift in Sources */,
+				057B7D652C297AFB00805E50 /* UIViewController+Ext.swift in Sources */,
 				05C785752C244B9E008C05E6 /* LegendViewModel.swift in Sources */,
 				057AAFF22C199B2C00CFDEEE /* EarthquakeMonitorUITests.swift in Sources */,
 				05C785712C244B5B008C05E6 /* LegendItem.swift in Sources */,
