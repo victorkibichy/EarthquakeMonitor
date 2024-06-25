@@ -57,7 +57,7 @@ class EarthquakeDetailViewController: UIViewController, MKMapViewDelegate {
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
         
-        mapView.heightAnchor.constraint(equalToConstant: 500).isActive = true
+            mapView.heightAnchor.constraint(equalToConstant: 500).isActive = true
     }
     
     private func configureData() {
