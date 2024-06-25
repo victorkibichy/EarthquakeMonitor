@@ -39,10 +39,10 @@ class EarthquakeDetailViewController: UIViewController, MKMapViewDelegate {
         view.backgroundColor = .systemBackground
         title = "Earthquake Details"
         
-        magnitudeLabel.font = UIFont.boldSystemFont(ofSize: 24)
-        placeLabel.font = UIFont.systemFont(ofSize: 20)
-        timeLabel.font = UIFont.systemFont(ofSize: 18)
-        depthLabel.font = UIFont.systemFont(ofSize: 18)
+        magnitudeLabel.font = UIFont.boldSystemFont(ofSize: 18)
+        placeLabel.font = UIFont.systemFont(ofSize: 15)
+        timeLabel.font = UIFont.systemFont(ofSize: 15)
+        depthLabel.font = UIFont.systemFont(ofSize: 15)
         
         let stackView = UIStackView(arrangedSubviews: [magnitudeLabel, placeLabel, timeLabel, depthLabel, mapView])
         stackView.axis = .vertical
