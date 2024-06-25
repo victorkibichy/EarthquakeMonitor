@@ -49,7 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         func createTabbar() -> UITabBarController {
             let tabbar = UITabBarController()
             UITabBar.appearance().tintColor = .systemBlue
-            tabbar.viewControllers = [createEarthquakeNC(), createMapNC()]
+            tabbar.viewControllers = [createMapNC(),createEarthquakeNC()]
             
             return tabbar
             

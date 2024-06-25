@@ -11,6 +11,7 @@ import CoreLocation // Import CoreLocation to handle user location
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
     var mapView: MKMapView!
+    var earthquake: Earthquake?
     private var earthquakes: [Earthquake] = []
     private var mapTypeSegmentedControl: UISegmentedControl!
     private var compassButton: MKCompassButton!
@@ -65,7 +66,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let legendBarItem = UIBarButtonItem(customView: legendButton)
         navigationItem.rightBarButtonItem = legendBarItem
         
-        // Removed the center on user location button
+        
     }
     
     private func setupLocationManager() {
@@ -109,8 +110,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let span = MKCoordinateSpan(latitudeDelta: 0.018, longitudeDelta: 0.018)
         
         // Create a region centered on the selected earthquake
-        let region = MKCoordinateRegion(center: coordinate, span: span)
-        
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 2000, longitudinalMeters: 2000)
+                mapView.setRegion(region, animated: true)
         // Set the region on the map view
         mapView.setRegion(region, animated: true)
         

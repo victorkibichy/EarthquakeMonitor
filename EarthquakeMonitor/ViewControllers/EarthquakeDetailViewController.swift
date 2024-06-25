@@ -8,7 +8,7 @@
 import UIKit
 import MapKit
 
-class EarthquakeDetailViewController: UIViewController {
+class EarthquakeDetailViewController: UIViewController, MKMapViewDelegate {
     private let earthquake: Earthquake
     
     private let magnitudeLabel = UILabel()
@@ -31,6 +31,8 @@ class EarthquakeDetailViewController: UIViewController {
         
         setupUI()
         configureData()
+        
+        mapView.delegate = self // Set delegate to self
     }
     
     private func setupUI() {
@@ -55,7 +57,7 @@ class EarthquakeDetailViewController: UIViewController {
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
         
-        mapView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        mapView.heightAnchor.constraint(equalToConstant: 500).isActive = true
     }
     
     private func configureData() {
@@ -68,10 +70,24 @@ class EarthquakeDetailViewController: UIViewController {
             let coordinate = CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0])
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
+            annotation.title = earthquake.place
             mapView.addAnnotation(annotation)
             
             let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
             mapView.setRegion(region, animated: true)
         }
+    }
+    
+    // This method is called when an annotation is tapped
+    func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
+        // Ensure the annotation is an MKPointAnnotation
+        guard let annotation = view.annotation as? MKPointAnnotation else { return }
+        
+        // Create an instance of MapViewController
+        let mapVC = MapViewController()
+        mapVC.earthquake = self.earthquake // Pass the current earthquake data
+        
+        // Push the MapViewController onto the navigation stack
+        navigationController?.pushViewController(mapVC, animated: true)
     }
 }
