@@ -11,9 +11,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     var window: UIWindow?
     
-  
-        
-        
         func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
             
             
@@ -27,16 +24,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             window?.windowScene = windowScene
             window?.rootViewController = createTabbar()
             window?.makeKeyAndVisible()
-            
-            
-            
-            
-           
+          
             configureNavigationBar()
             
         }
         
-    func createEarthquakeNC() -> UINavigationController {
+  private func createEarthquakeNC() -> UINavigationController {
         let earthquakeVC = EarthquakeViewController()
         earthquakeVC.title = "Earthquakes"
         // Set the tab bar item with a world icon
@@ -44,7 +37,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         return UINavigationController(rootViewController: earthquakeVC)
     }
 
-    func createMapNC() -> UINavigationController {
+ private func createMapNC() -> UINavigationController {
         let mapVC = MapViewController()
         mapVC.title = "View Map"
         // Set the tab bar item with a map icon

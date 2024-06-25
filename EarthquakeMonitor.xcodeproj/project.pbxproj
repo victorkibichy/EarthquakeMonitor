@@ -193,10 +193,10 @@
 		057AAFCC2C199B2800CFDEEE /* EarthquakeMonitor */ = {
 			isa = PBXGroup;
 			children = (
-				057AB0092C19A2A600CFDEEE /* ViewControllers */,
-				057AB0072C19A20800CFDEEE /* Support */,
-				057AB0022C19A15500CFDEEE /* ViewModels */,
 				057AB0002C19A14500CFDEEE /* Models */,
+				057AB0092C19A2A600CFDEEE /* ViewControllers */,
+				057AB0022C19A15500CFDEEE /* ViewModels */,
+				057AB0072C19A20800CFDEEE /* Support */,
 				054D03B92C1AD09F000D7DEE /* Utilities */,
 				057AAFD92C199B2B00CFDEEE /* Assets.xcassets */,
 				057AAFDB2C199B2B00CFDEEE /* LaunchScreen.storyboard */,
@@ -259,6 +259,7 @@
 				057AAFD12C199B2800CFDEEE /* MapViewController.swift */,
 				05961E692C1C7FB200C36B2F /* EarthquakeAnnotationView.swift */,
 				05961E6D2C1C81D500C36B2F /* LegendViewController.swift */,
+				0574E3262C21BD9700F06AA8 /* EarthquakeDetailViewController.swift */,
 				0574E3212C21BC1300F06AA8 /* CustomViews */,
 				057B7D662C297B1600805E50 /* Custom View Extensions */,
 			);
@@ -268,7 +269,6 @@
 		057B7D512C2962EB00805E50 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				0574E3262C21BD9700F06AA8 /* EarthquakeDetailViewController.swift */,
 				0574E3222C21BC9700F06AA8 /* EarthquakeTableViewCell.swift */,
 			);
 			path = Cells;

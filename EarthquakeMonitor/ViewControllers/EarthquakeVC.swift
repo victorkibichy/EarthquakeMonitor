@@ -185,10 +185,11 @@ extension EarthquakeViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedEarthquake = viewModel.earthquakes[indexPath.row]
-        mapView.didSelectEarthquake(selectedEarthquake)
-        navigationController?.pushViewController(mapView, animated: true)
+        let detailVC = EarthquakeDetailViewController(earthquake: selectedEarthquake)
+        navigationController?.pushViewController(detailVC, animated: true)
     }
 }
+
 
 extension EarthquakeViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
