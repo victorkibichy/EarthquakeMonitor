@@ -7,16 +7,18 @@
 
 import UIKit
 import MapKit
-import CoreLocation // Import CoreLocation to handle user location
+import CoreLocation
 
-class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
+    
     var mapView: MKMapView!
     var earthquake: Earthquake?
     private var earthquakes: [Earthquake] = []
     private var mapTypeSegmentedControl: UISegmentedControl!
     private var compassButton: MKCompassButton!
-    private let locationManager = CLLocationManager() // Location manager to handle user location
-    
+    private let locationManager = CLLocationManager()
+    private var searchBar: UISearchBar!
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,7 +26,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         setupMapView()
         setupMapControls()
-        setupLocationManager() // Setup location manager
+        setupSearchBar()
+        setupLocationManager()
         fetchEarthquakeData()
     }
     
@@ -40,7 +43,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             mapView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        mapView.showsUserLocation = true // Show user location on the map
+        mapView.showsUserLocation = true
         mapView.showsTraffic = true
         mapView.showsScale = true
         mapView.showsCompass = true
@@ -49,30 +52,50 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     private func setupMapControls() {
-        // Map type segmented control
         mapTypeSegmentedControl = UISegmentedControl(items: ["Standard", "Satellite", "Hybrid"])
         mapTypeSegmentedControl.selectedSegmentIndex = 0
         mapTypeSegmentedControl.addTarget(self, action: #selector(mapTypeChanged(_:)), for: .valueChanged)
         navigationItem.titleView = mapTypeSegmentedControl
         
-        // Compass button
         compassButton = MKCompassButton(mapView: mapView)
         compassButton.compassVisibility = .visible
         mapView.addSubview(compassButton)
         
-        // Legend button
         let legendButton = UIButton(type: .infoLight)
         legendButton.addTarget(self, action: #selector(showLegend), for: .touchUpInside)
         let legendBarItem = UIBarButtonItem(customView: legendButton)
         navigationItem.rightBarButtonItem = legendBarItem
+    }
+    
+    private func setupSearchBar() {
+        searchBar = UISearchBar()
+        searchBar.delegate = self
+        searchBar.placeholder = "Search for places"
+        searchBar.translatesAutoresizingMaskIntoConstraints = false
         
+        searchBar.isTranslucent = true
+        searchBar.barTintColor = UIColor.clear
+        searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         
+        if let textField = searchBar.value(forKey: "searchField") as? UITextField {
+            textField.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            textField.textColor = .black
+        }
+        
+        view.addSubview(searchBar)
+        
+        NSLayoutConstraint.activate([
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
+            searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
+            searchBar.heightAnchor.constraint(equalToConstant: 50) // Adjust height as needed
+        ])
     }
     
     private func setupLocationManager() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.requestWhenInUseAuthorization() // Request location access
+        locationManager.requestWhenInUseAuthorization()
     }
     
     @objc private func mapTypeChanged(_ sender: UISegmentedControl) {
@@ -106,16 +129,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         let coordinate = CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0])
         
-        // Calculate the span (region size)
-        let span = MKCoordinateSpan(latitudeDelta: 0.018, longitudeDelta: 0.018)
-        
-        // Create a region centered on the selected earthquake
         let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 2000, longitudinalMeters: 2000)
-                mapView.setRegion(region, animated: true)
-        // Set the region on the map view
         mapView.setRegion(region, animated: true)
         
-        // Optionally, add an enlarged annotation
         addEnlargedAnnotation(for: earthquake)
     }
 
@@ -128,11 +144,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.removeAnnotations(mapView.annotations)
         mapView.addAnnotation(annotation)
         
-        // Select the annotation to display the callout immediately
         mapView.selectAnnotation(annotation, animated: true)
     }
 
-    
     private func fetchEarthquakeData() {
         guard let url = URL(string: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson") else {
             print("Invalid URL")
@@ -159,7 +173,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                         )
                     }
                     
-                    self?.addAnnotations() // Call addAnnotations after data is fetched
+                    self?.addAnnotations()
                 }
             } catch {
                 print("Failed to decode earthquake data:", error)
@@ -203,13 +217,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         return annotationView
     }
     
-    // CLLocationManagerDelegate method to handle authorization changes
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
         case .authorizedWhenInUse, .authorizedAlways:
             locationManager.startUpdatingLocation()
         case .denied, .restricted:
-            // Handle denied access to location
             showLocationAccessDeniedAlert()
         default:
             break
@@ -220,5 +232,34 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let alert = UIAlertController(title: "Location Access Denied", message: "To use this feature, please enable location access in Settings.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default))
         present(alert, animated: true)
+    }
+    
+    // MARK: - UISearchBarDelegate
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let searchText = searchBar.text, !searchText.isEmpty else {
+            return
+        }
+        
+        let localSearchRequest = MKLocalSearch.Request()
+        localSearchRequest.naturalLanguageQuery = searchText
+        
+        let localSearch = MKLocalSearch(request: localSearchRequest)
+        localSearch.start { [weak self] (response, error) in
+            guard let response = response, error == nil else {
+                print("Error searching for places:", error?.localizedDescription ?? "Unknown error")
+                return
+            }
+            
+            if let firstMapItem = response.mapItems.first {
+                let placemark = firstMapItem.placemark
+                let coordinate = placemark.coordinate
+                
+                let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 2000, longitudinalMeters: 2000)
+                self?.mapView.setRegion(region, animated: true)
+            }
+        }
+        
+        searchBar.resignFirstResponder()
     }
 }
