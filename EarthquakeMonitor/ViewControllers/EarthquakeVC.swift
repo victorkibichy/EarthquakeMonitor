@@ -185,7 +185,14 @@ extension EarthquakeViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedEarthquake = viewModel.earthquakes[indexPath.row]
-        let detailVC = EarthquakeDetailViewController(earthquake: selectedEarthquake)
+        
+        // Create the ViewModel for the selected earthquake
+        let detailViewModel = EarthquakeDetailViewModel(earthquake: selectedEarthquake)
+        
+        // Create the detail view controller with the ViewModel
+        let detailVC = EarthquakeDetailViewController(viewModel: detailViewModel)
+        
+        // Push the detail view controller onto the navigation stack
         navigationController?.pushViewController(detailVC, animated: true)
     }
 }

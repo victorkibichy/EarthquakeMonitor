@@ -9,7 +9,7 @@ import UIKit
 import MapKit
 
 class EarthquakeDetailViewController: UIViewController, MKMapViewDelegate {
-    private let earthquake: Earthquake
+    private let viewModel: EarthquakeDetailViewModel
     
     private let magnitudeLabel = UILabel()
     private let placeLabel = UILabel()
@@ -17,8 +17,8 @@ class EarthquakeDetailViewController: UIViewController, MKMapViewDelegate {
     private let depthLabel = UILabel()
     private let mapView = MKMapView()
     
-    init(earthquake: Earthquake) {
-        self.earthquake = earthquake
+    init(viewModel: EarthquakeDetailViewModel) {
+        self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -30,9 +30,9 @@ class EarthquakeDetailViewController: UIViewController, MKMapViewDelegate {
         super.viewDidLoad()
         
         setupUI()
-        configureData()
+        bindViewModel()
         
-        mapView.delegate = self // Set delegate to self
+        mapView.delegate = self
     }
     
     private func setupUI() {
@@ -41,6 +41,9 @@ class EarthquakeDetailViewController: UIViewController, MKMapViewDelegate {
         
         magnitudeLabel.font = UIFont.boldSystemFont(ofSize: 18)
         placeLabel.font = UIFont.systemFont(ofSize: 15)
+        magnitudeLabel.textColor = UIColor.red
+        placeLabel.textColor = UIColor.green
+        timeLabel.textColor = UIColor.cyan
         timeLabel.font = UIFont.systemFont(ofSize: 15)
         depthLabel.font = UIFont.systemFont(ofSize: 15)
         
@@ -57,20 +60,20 @@ class EarthquakeDetailViewController: UIViewController, MKMapViewDelegate {
             stackView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -20)
         ])
         
-            mapView.heightAnchor.constraint(equalToConstant: 500).isActive = true
+        mapView.heightAnchor.constraint(equalToConstant: 500).isActive = true
     }
     
-    private func configureData() {
-        magnitudeLabel.text = "Magnitude: \(earthquake.magnitude)"
-        placeLabel.text = "Location: \(earthquake.place)"
-        timeLabel.text = "Time: \(DateFormatter.localizedString(from: earthquake.time, dateStyle: .medium, timeStyle: .short))"
-        depthLabel.text = "Depth: \(earthquake.coordinates.count > 2 ? "\(earthquake.coordinates[2]) km" : "Unknown")"
+    private func bindViewModel() {
+       
+        magnitudeLabel.text = viewModel.magnitudeText
+        placeLabel.text = viewModel.placeText
+        timeLabel.text = viewModel.timeText
+        depthLabel.text = viewModel.depthText
         
-        if earthquake.coordinates.count >= 2 {
-            let coordinate = CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0])
+        if let coordinate = viewModel.coordinate {
             let annotation = MKPointAnnotation()
             annotation.coordinate = coordinate
-            annotation.title = earthquake.place
+            annotation.title = viewModel.annotationTitle
             mapView.addAnnotation(annotation)
             
             let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
@@ -85,7 +88,9 @@ class EarthquakeDetailViewController: UIViewController, MKMapViewDelegate {
         
         // Create an instance of MapViewController
         let mapVC = MapViewController()
-        mapVC.earthquake = self.earthquake // Pass the current earthquake data
+        
+        // Pass the current earthquake data from the ViewModel
+        mapVC.earthquake = viewModel.earthquakeData
         
         // Push the MapViewController onto the navigation stack
         navigationController?.pushViewController(mapVC, animated: true)

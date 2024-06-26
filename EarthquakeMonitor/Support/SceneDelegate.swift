@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
   private func createEarthquakeNC() -> UINavigationController {
         let earthquakeVC = EarthquakeViewController()
-        earthquakeVC.title = "Earthquakes"
+        earthquakeVC.title = "Recent Earthquakes"
         // Set the tab bar item with a world icon
         earthquakeVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "map"), tag: 0)
         return UINavigationController(rootViewController: earthquakeVC)
