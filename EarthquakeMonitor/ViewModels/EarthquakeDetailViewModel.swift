@@ -11,7 +11,7 @@ import CoreLocation
 class EarthquakeDetailViewModel {
     private let earthquake: Earthquake
     
-    // Expose a public getter to access the private earthquake property
+    // Expose a public getter to access the private earthquake property. thi sis because the earthquake data is universal for this [roject
     var earthquakeData: Earthquake {
         return earthquake
     }

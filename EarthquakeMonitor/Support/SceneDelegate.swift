@@ -8,58 +8,62 @@
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
-    
+
     var window: UIWindow?
-    
-        func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-            
-            
-            guard let windowScene = (scene as? UIWindowScene) else { return }
-            
-            let earthquakeNC = UINavigationController(rootViewController: EarthquakeViewController())
-            let mapNC = UINavigationController(rootViewController: MapViewController())
-            
-            
-            window = UIWindow(frame: windowScene.coordinateSpace.bounds)
-            window?.windowScene = windowScene
-            window?.rootViewController = createTabbar()
-            window?.makeKeyAndVisible()
-          
-            configureNavigationBar()
-            
-        }
+
+    func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+        guard let windowScene = (scene as? UIWindowScene) else { return }
+
+        window = UIWindow(frame: windowScene.coordinateSpace.bounds)
+        window?.windowScene = windowScene
         
-  private func createEarthquakeNC() -> UINavigationController {
+        let splashViewController = SplashViewController()
+        window?.rootViewController = splashViewController
+        window?.makeKeyAndVisible()
+
+        NotificationCenter.default.addObserver(self, selector: #selector(showMainApp), name: NSNotification.Name("SplashScreenCompleted"), object: nil)
+    }
+
+    @objc func showMainApp() {
+        // Switch to the main tab bar controller
+        window?.rootViewController = createTabbar()
+        configureNavigationBar()
+    }
+
+    private func createEarthquakeNC() -> UINavigationController {
         let earthquakeVC = EarthquakeViewController()
         earthquakeVC.title = "Recent Earthquakes"
-        // Set the tab bar item with a world icon
         earthquakeVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "map"), tag: 0)
         return UINavigationController(rootViewController: earthquakeVC)
     }
 
- private func createMapNC() -> UINavigationController {
+    private func createMapNC() -> UINavigationController {
         let mapVC = MapViewController()
         mapVC.title = "View Map"
-        // Set the tab bar item with a map icon
         mapVC.tabBarItem = UITabBarItem(title: nil, image: UIImage(systemName: "globe"), tag: 1)
         return UINavigationController(rootViewController: mapVC)
     }
 
-        
-        func createTabbar() -> UITabBarController {
-            let tabbar = UITabBarController()
-            UITabBar.appearance().tintColor = .systemBlue
-            tabbar.viewControllers = [createMapNC(),createEarthquakeNC()]
-            
-            return tabbar
-            
-        }
-        
-        func configureNavigationBar() {
-            UINavigationBar.appearance().tintColor = .white
-            
-        }
-        
+    private func createTabbar() -> UITabBarController {
+        let tabbar = UITabBarController()
+        UITabBar.appearance().tintColor = .systemBlue
+        tabbar.viewControllers = [createMapNC(), createEarthquakeNC()]
+        return tabbar
+    }
+
+    private func configureNavigationBar() {
+        UINavigationBar.appearance().tintColor = .white
+    }
+    
+    func sceneDidDisconnect(_ scene: UIScene) {}
+    func sceneDidBecomeActive(_ scene: UIScene) {}
+    func sceneWillResignActive(_ scene: UIScene) {}
+    func sceneWillEnterForeground(_ scene: UIScene) {}
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+    }
+}
+
        
         
         func sceneDidDisconnect(_ scene: UIScene) {
@@ -94,6 +98,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         }
         
         
-    }
+
     
 
