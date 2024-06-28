@@ -27,4 +27,5 @@ class NetworkManager {
             .decode(type: EarthquakeResponse.self, decoder: JSONDecoder())
             .eraseToAnyPublisher()
     }
+    
 }
