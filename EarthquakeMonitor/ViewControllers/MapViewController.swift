@@ -8,16 +8,20 @@
 import UIKit
 import MapKit
 import CoreLocation
+import Combine
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UISearchBarDelegate {
     
     var mapView: MKMapView!
     var earthquake: Earthquake?
-    private var earthquakes: [Earthquake] = []
     private var mapTypeSegmentedControl: UISegmentedControl!
     private var compassButton: MKCompassButton!
-    private let locationManager = CLLocationManager()
     private var searchBar: UISearchBar!
+    private let locationManager = CLLocationManager()
+    
+    // New ViewModel
+    private var viewModel = MapViewModel()
+    private var cancellables: Set<AnyCancellable> = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,9 +31,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         setupMapView()
         setupMapControls()
         setupSearchBar()
-        createDismissKeyboardTapGesture()
         setupLocationManager()
-        fetchEarthquakeData()
+        fetchDataAndObserve()
         createDismissKeyboardTapGesture()
     }
     
@@ -122,70 +125,29 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         present(navController, animated: true, completion: nil)
     }
-    
-    func didSelectEarthquake(_ earthquake: Earthquake) {
-        guard mapView != nil else {
-            print("Error: mapView is nil.")
-            return
-        }
-        
-        let coordinate = CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0])
-        
-        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 2000, longitudinalMeters: 2000)
-        mapView.setRegion(region, animated: true)
-        
-        addEnlargedAnnotation(for: earthquake)
-    }
 
-    private func addEnlargedAnnotation(for earthquake: Earthquake) {
-        let annotation = MKPointAnnotation()
-        annotation.coordinate = CLLocationCoordinate2D(latitude: earthquake.coordinates[1], longitude: earthquake.coordinates[0])
-        annotation.title = "Magnitude: \(earthquake.magnitude)"
-        annotation.subtitle = earthquake.place
+    private func fetchDataAndObserve() {
+        // Fetch earthquake data using the ViewModel
+        viewModel.fetchEarthquakeData()
         
-        mapView.removeAnnotations(mapView.annotations)
-        mapView.addAnnotation(annotation)
-        
-        mapView.selectAnnotation(annotation, animated: true)
-    }
-
-    private func fetchEarthquakeData() {
-        guard let url = URL(string: "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson") else {
-            print("Invalid URL")
-            return
-        }
-        
-        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
-            guard let data = data, error == nil else {
-                print("Failed to fetch earthquake data:", error?.localizedDescription ?? "Unknown error")
-                return
+        // Observe changes in the ViewModel's earthquakes property
+        viewModel.$earthquakes
+            .sink { [weak self] earthquakes in
+                self?.updateAnnotations(with: earthquakes)
             }
-            
-            do {
-                let decoder = JSONDecoder()
-                let earthquakeResponse = try decoder.decode(EarthquakeResponse.self, from: data)
-                
-                DispatchQueue.main.async {
-                    self?.earthquakes = earthquakeResponse.features.map { feature in
-                        Earthquake(
-                            magnitude: feature.properties.mag,
-                            place: feature.properties.place,
-                            time: Date(timeIntervalSince1970: TimeInterval(feature.properties.time / 1000)),
-                            coordinates: feature.geometry.coordinates
-                        )
-                    }
-                    
-                    self?.addAnnotations()
+            .store(in: &cancellables)
+        
+        // Observe changes in the ViewModel's errorMessage property
+        viewModel.$errorMessage
+            .sink { errorMessage in
+                if let message = errorMessage {
+                    print("Error: \(message)")
                 }
-            } catch {
-                print("Failed to decode earthquake data:", error)
             }
-        }
-        
-        task.resume()
+            .store(in: &cancellables)
     }
-    
-    private func addAnnotations() {
+
+    private func updateAnnotations(with earthquakes: [Earthquake]) {
         mapView.removeAnnotations(mapView.annotations)
         
         for earthquake in earthquakes {
@@ -268,6 +230,5 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func createDismissKeyboardTapGesture() {
            let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
            view.addGestureRecognizer(tap)
-           
-       }
+    }
 }
