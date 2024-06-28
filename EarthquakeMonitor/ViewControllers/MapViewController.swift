@@ -27,8 +27,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         setupMapView()
         setupMapControls()
         setupSearchBar()
+        createDismissKeyboardTapGesture()
         setupLocationManager()
         fetchEarthquakeData()
+        createDismissKeyboardTapGesture()
     }
     
     private func setupMapView() {
@@ -78,17 +80,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
         
         if let textField = searchBar.value(forKey: "searchField") as? UITextField {
-            textField.backgroundColor = UIColor.white.withAlphaComponent(0.5)
+            textField.backgroundColor = UIColor.white.withAlphaComponent(0.3)
             textField.textColor = .black
         }
         
         view.addSubview(searchBar)
         
         NSLayoutConstraint.activate([
-            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 10),
+            searchBar.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 5),
             searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10),
             searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -10),
-            searchBar.heightAnchor.constraint(equalToConstant: 50) // Adjust height as needed
+            searchBar.heightAnchor.constraint(equalToConstant: 50)
         ])
     }
     
@@ -262,4 +264,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         searchBar.resignFirstResponder()
     }
+    
+    func createDismissKeyboardTapGesture() {
+           let tap = UITapGestureRecognizer(target: view, action: #selector(UIView.endEditing))
+           view.addGestureRecognizer(tap)
+           
+       }
 }

@@ -43,13 +43,13 @@ class EarthquakeDetailViewController: UIViewController, MKMapViewDelegate {
         placeLabel.font = UIFont.systemFont(ofSize: 15)
         magnitudeLabel.textColor = UIColor.red
         placeLabel.textColor = UIColor.green
-        timeLabel.textColor = UIColor.cyan
+        timeLabel.textColor = UIColor.systemTeal
         timeLabel.font = UIFont.systemFont(ofSize: 15)
         depthLabel.font = UIFont.systemFont(ofSize: 15)
         
-        let stackView = UIStackView(arrangedSubviews: [magnitudeLabel, placeLabel, timeLabel, depthLabel, mapView])
+        let stackView = UIStackView(arrangedSubviews: [placeLabel, magnitudeLabel, timeLabel, depthLabel, mapView])
         stackView.axis = .vertical
-        stackView.spacing = 15
+        stackView.spacing = 5
         stackView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(stackView)
         

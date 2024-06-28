@@ -16,14 +16,10 @@ class EarthquakeAnnotationView: MKMarkerAnnotationView {
             
             // Extract the magnitudeS from the title text
             
-            
-            
             let magnitudeString = earthquakeAnnotation.title?.replacingOccurrences(of: "Magnitude: ", with: "")
             let magnitude = Double(magnitudeString ?? "") ?? 0.0
             
             //  CUSTOM CONFIGURATIONS these are Configurations the marker's appearance based on the magnitude
-            
-            
             
             markerTintColor = getMarkerColor(forMagnitude: magnitude)
             glyphText = magnitudeString
