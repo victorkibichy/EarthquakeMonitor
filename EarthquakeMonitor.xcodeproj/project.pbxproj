@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05362C672C2E854100E5F51C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05362C662C2E854100E5F51C /* NetworkManager.swift */; };
+		05362C682C2E854100E5F51C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05362C662C2E854100E5F51C /* NetworkManager.swift */; };
+		05362C692C2E854100E5F51C /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05362C662C2E854100E5F51C /* NetworkManager.swift */; };
 		054D03BB2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D03BA2C1AD0D9000D7DEE /* ErrorMessages.swift */; };
 		054D03BC2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D03BA2C1AD0D9000D7DEE /* ErrorMessages.swift */; };
 		054D03BD2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 054D03BA2C1AD0D9000D7DEE /* ErrorMessages.swift */; };
@@ -96,6 +99,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		05362C662C2E854100E5F51C /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		054D03BA2C1AD0D9000D7DEE /* ErrorMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessages.swift; sourceTree = "<group>"; };
 		0574E3222C21BC9700F06AA8 /* EarthquakeTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthquakeTableViewCell.swift; sourceTree = "<group>"; };
 		0574E3262C21BD9700F06AA8 /* EarthquakeDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarthquakeDetailViewController.swift; sourceTree = "<group>"; };
@@ -154,6 +158,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		05362C652C2E831500E5F51C /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				05362C662C2E854100E5F51C /* NetworkManager.swift */,
+			);
+			path = Managers;
+			sourceTree = "<group>";
+		};
 		054D03B92C1AD09F000D7DEE /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,8 +210,9 @@
 			isa = PBXGroup;
 			children = (
 				057AB0002C19A14500CFDEEE /* Models */,
-				057AB0092C19A2A600CFDEEE /* ViewControllers */,
 				057AB0022C19A15500CFDEEE /* ViewModels */,
+				057AB0092C19A2A600CFDEEE /* ViewControllers */,
+				05362C652C2E831500E5F51C /* Managers */,
 				057AB0072C19A20800CFDEEE /* Support */,
 				054D03B92C1AD09F000D7DEE /* Utilities */,
 				057AAFD92C199B2B00CFDEEE /* Assets.xcassets */,
@@ -417,6 +430,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05362C672C2E854100E5F51C /* NetworkManager.swift in Sources */,
 				057AB0042C19A1E400CFDEEE /* Earthquake.swift in Sources */,
 				05961E6E2C1C81D500C36B2F /* LegendViewController.swift in Sources */,
 				057B7D632C297AFB00805E50 /* UIViewController+Ext.swift in Sources */,
@@ -446,6 +460,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05362C682C2E854100E5F51C /* NetworkManager.swift in Sources */,
 				05961E6B2C1C7FB200C36B2F /* EarthquakeAnnotationView.swift in Sources */,
 				054D03BC2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */,
 				057B7D642C297AFB00805E50 /* UIViewController+Ext.swift in Sources */,
@@ -487,6 +502,7 @@
 				057B7D592C29683800805E50 /* EMBodyLabel.swift in Sources */,
 				0574E3252C21BC9700F06AA8 /* EarthquakeTableViewCell.swift in Sources */,
 				05961E682C1C7EB700C36B2F /* EarthquakeAnnotation.swift in Sources */,
+				05362C692C2E854100E5F51C /* NetworkManager.swift in Sources */,
 				05C785772C245232008C05E6 /* EarthquakeMonitor.xcdatamodeld in Sources */,
 				054D03BD2C1AD0D9000D7DEE /* ErrorMessages.swift in Sources */,
 				05961E6C2C1C7FB200C36B2F /* EarthquakeAnnotationView.swift in Sources */,

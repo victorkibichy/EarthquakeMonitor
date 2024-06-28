@@ -1,33 +1,22 @@
-// EarthquakeViewModel.swift
-// EarthquakeMonitor
-
+//
+//  NetworkManager.swift
+//  EarthquakeMonitor
+//
+//  Created by  Bouncy Baby on 6/25/24.
+//
 import Foundation
 import Combine
 
-class EarthquakeViewModel {
+class EarthquakeViewModel: ObservableObject {
     @Published var earthquakes: [Earthquake] = []
     @Published var errorMessage: String?
+    
     private var cancellables: Set<AnyCancellable> = []
     private var allEarthquakes: [Earthquake] = []
+    private let networkManager = NetworkManager()
     
     func fetchEarthquakes() {
-        let urlString = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
-        guard let url = URL(string: urlString) else {
-            errorMessage = "Invalid URL"
-            return
-        }
-
-        URLSession.shared.dataTaskPublisher(for: url)
-            .tryMap { result -> Data in
-                guard let httpResponse = result.response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
-                    throw URLError(.badServerResponse)
-                }
-                if let jsonString = String(data: result.data, encoding: .utf8) {
-                    print("Raw JSON: \(jsonString)")
-                }
-                return result.data
-            }
-            .decode(type: EarthquakeResponse.self, decoder: JSONDecoder())
+        networkManager.fetchEarthquakes()
             .map { response in
                 response.features.map { feature in
                     Earthquake(
