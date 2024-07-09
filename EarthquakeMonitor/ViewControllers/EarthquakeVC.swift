@@ -119,7 +119,7 @@ class EarthquakeViewController: UIViewController {
     }
     
     private func presentCustomAlert(title: String, message: String, buttonTitle: String) {
-        let alertVC = EMAlertVC(title: title, message: message, buttonTitle: buttonTitle)
+        let alertVC = EarthquakeMonitorAlertVC(title: title, message: message, buttonTitle: buttonTitle)
         alertVC.modalPresentationStyle = .overFullScreen
         alertVC.modalTransitionStyle = .crossDissolve
         present(alertVC, animated: true)

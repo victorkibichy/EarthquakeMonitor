@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EMTitleLabel: UILabel {
+class EarthquakeMonitorTitleLabel: UILabel {
 
    
     override init(frame: CGRect) {

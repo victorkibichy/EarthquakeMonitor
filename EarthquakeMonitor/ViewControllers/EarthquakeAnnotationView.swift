@@ -14,7 +14,7 @@ class EarthquakeAnnotationView: MKMarkerAnnotationView {
         willSet {
             guard let earthquakeAnnotation = newValue as? MKPointAnnotation else { return }
             
-            // Extract the magnitudeS from the title text
+            /// Extract the magnitudeS from the title text
             
             let magnitudeString = earthquakeAnnotation.title?.replacingOccurrences(of: "Magnitude: ", with: "")
             let magnitude = Double(magnitudeString ?? "") ?? 0.0

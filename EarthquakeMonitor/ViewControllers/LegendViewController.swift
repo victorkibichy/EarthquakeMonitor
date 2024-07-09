@@ -11,7 +11,6 @@ import UIKit
 class LegendViewController: UIViewController {
     private let viewModel = LegendViewModel()
     
-    // Title label
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Map Legend"
@@ -20,27 +19,23 @@ class LegendViewController: UIViewController {
         return label
     }()
     
-    // Dismiss button
     private let dismissButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "chevron.down.circle.fill"), for: .normal)
         button.tintColor = .black
-        button.addTarget(self, action: #selector(dismissLegend), for: .touchUpInside)
+        button.addTarget(LegendViewController.self, action: #selector(dismissLegend), for: .touchUpInside)
         button.contentEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         return button
     }()
     
-    // Initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
     
-    // Setup the legend view
     private func setupView() {
         updateBackgroundColor()
         
-        // Shadow and border
         view.layer.cornerRadius = 16
         view.layer.masksToBounds = true
         view.layer.shadowColor = UIColor.black.cgColor
@@ -48,24 +43,20 @@ class LegendViewController: UIViewController {
         view.layer.shadowOffset = CGSize(width: 0, height: 4)
         view.layer.shadowRadius = 8
         
-        // Stack view for title, dismiss button, and legend items
         let stackView = UIStackView()
         stackView.axis = .vertical
-        stackView.alignment = .center  // Center alignment
-        stackView.spacing = 8  // Reduced spacing
+        stackView.alignment = .center
+        stackView.spacing = 8
         stackView.translatesAutoresizingMaskIntoConstraints = false
         
         view.addSubview(stackView)
         
-        // Add title label
         stackView.addArrangedSubview(titleLabel)
         
-        // Add dismiss button
         let dismissStackView = UIStackView(arrangedSubviews: [UIView(), dismissButton])
         dismissStackView.spacing = 12
         stackView.addArrangedSubview(dismissStackView)
         
-        // Add legend items to the stack view
         for index in 0..<viewModel.numberOfItems {
             if let item = viewModel.item(at: index) {
                 let legendItem = createLegendItem(color: item.color, description: item.description)
@@ -73,10 +64,8 @@ class LegendViewController: UIViewController {
             }
         }
         
-        // Calculate half of the screen height
         let halfScreenHeight = UIScreen.main.bounds.height / 2
         
-        // Add constraints to stack view
         let centerYConstraint = stackView.centerYAnchor.constraint(equalTo: view.topAnchor, constant: halfScreenHeight)
         let leadingConstraint = stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20)
         let trailingConstraint = stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -20)
@@ -90,12 +79,10 @@ class LegendViewController: UIViewController {
             maxHeightConstraint
         ])
         
-        // Add pan gesture recognizer to dismiss the view
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
         view.addGestureRecognizer(panGesture)
     }
     
-    // Create a view for each legend item
     private func createLegendItem(color: UIColor, description: String) -> UIView {
         let legendItemView = UIView()
         legendItemView.translatesAutoresizingMaskIntoConstraints = false
@@ -131,7 +118,6 @@ class LegendViewController: UIViewController {
         return legendItemView
     }
     
-    // Update background color based on interface style
     private func updateBackgroundColor() {
         if traitCollection.userInterfaceStyle == .dark {
             view.backgroundColor = UIColor.black.withAlphaComponent(0.95)
@@ -144,18 +130,15 @@ class LegendViewController: UIViewController {
         }
     }
     
-    // Update background color on trait collection change
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
         super.traitCollectionDidChange(previousTraitCollection)
         updateBackgroundColor()
     }
     
-    // Dismiss the legend view
     @objc private func dismissLegend() {
         dismiss(animated: true, completion: nil)
     }
     
-    // Handle pan gesture to dismiss the view
     @objc private func handlePanGesture(_ gesture: UIPanGestureRecognizer) {
         let translation = gesture.translation(in: view)
         switch gesture.state {

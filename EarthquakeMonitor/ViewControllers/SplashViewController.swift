@@ -33,7 +33,6 @@ class SplashViewController: UIViewController {
         UIView.animate(withDuration: 2.5, animations: {
             self.view.alpha = 1.0
         }) { _ in
-            // Transition to the main app after the animation
             DispatchQueue.main.asyncAfter(deadline: .now() + 2.5) {
                 self.transitionToMainApp()
             }

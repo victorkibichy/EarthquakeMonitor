@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EMButton: UIButton {
+class EarthquakeMonitorButton: UIButton {
     
         override init(frame: CGRect) {
             

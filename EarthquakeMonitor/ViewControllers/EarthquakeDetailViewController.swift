@@ -81,18 +81,13 @@ class EarthquakeDetailViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
-    // This method is called when an annotation is tapped
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-        // Ensure the annotation is an MKPointAnnotation
-        guard let annotation = view.annotation as? MKPointAnnotation else { return }
+        guard view.annotation is MKPointAnnotation else { return }
         
-        // Create an instance of MapViewController
         let mapVC = MapViewController()
         
-        // Pass the current earthquake data from the ViewModel
         mapVC.earthquake = viewModel.earthquakeData
         
-        // Push the MapViewController onto the navigation stack
         navigationController?.pushViewController(mapVC, animated: true)
     }
 }

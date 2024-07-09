@@ -19,7 +19,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     private var searchBar: UISearchBar!
     private let locationManager = CLLocationManager()
     
-    // New ViewModel
     private var viewModel = MapViewModel()
     private var cancellables: Set<AnyCancellable> = []
 

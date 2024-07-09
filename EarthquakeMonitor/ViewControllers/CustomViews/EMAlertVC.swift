@@ -7,12 +7,12 @@
 
 import UIKit
 
-class EMAlertVC: UIViewController {
+class EarthquakeMonitorAlertVC: UIViewController {
     
     let containerView = UIView()
-    let titleLabel = EMTitleLabel(textAlignment: .center, fontSize:20)
-    let messageLabel = EMBodyLabel(textAlignment: .center, fontSize: 20)
-    let actionButton = EMButton(backgroundColor: .systemPink, title: "OK")
+    let titleLabel = EarthquakeMonitorTitleLabel(textAlignment: .center, fontSize:20)
+    let messageLabel = EarthquakeMonitorBodyLabel(textAlignment: .center, fontSize: 20)
+    let actionButton = EarthquakeMonitorButton(backgroundColor: .systemPink, title: "OK")
               
     
     var aletTitle: String?

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EMBodyLabel: UILabel {
+class EarthquakeMonitorBodyLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

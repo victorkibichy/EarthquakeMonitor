@@ -10,7 +10,6 @@ import Combine
 
 class NetworkManager {
     
-    // FETCHING THE EARTHQUAKES
     func fetchEarthquakes() -> AnyPublisher<EarthquakeResponse, Error> {
         let urlString = "https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_day.geojson"
         guard let url = URL(string: urlString) else {
